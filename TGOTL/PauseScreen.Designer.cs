@@ -59,6 +59,7 @@
             this.lblSaveButton.TabIndex = 1;
             this.lblSaveButton.Tag = "menu";
             this.lblSaveButton.Text = "Save";
+            this.lblSaveButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SaveBtnClick);
             // 
             // lblQuitButton
             // 

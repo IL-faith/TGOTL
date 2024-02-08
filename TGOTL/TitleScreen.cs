@@ -152,6 +152,7 @@ namespace TGOTL
         {
             if (playstyle.Equals("mouse"))
             {
+                game.PlaystyleIsMouse = (playstyle.Equals("mouse") ? true : false);
                 StoryScreen newGame = new StoryScreen(this.Location, game, false);
                 newGame.Show();
                 this.Close();
@@ -258,6 +259,7 @@ namespace TGOTL
                     switch (menuChoiceSelected)
                     {
                         case 0:
+                            game.PlaystyleIsMouse = (playstyle.Equals("mouse") ? true : false);
                             StoryScreen newGame = new StoryScreen(this.Location, game, false);
                             newGame.Show();
                             this.Close();

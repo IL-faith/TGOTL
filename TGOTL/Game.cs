@@ -13,9 +13,9 @@ namespace TGOTL
     public class Game
     {
         bool playstyleIsMouse = true;
-        int stagesUnlocked = 1, albumIndex = 0;
+        int albumIndex = 0;
         List<LoadingScreen> loadingScreens = new List<LoadingScreen>();
-        Stage[] stages = new Stage[0];
+        Stage[] stages = new Stage[5];
 
         public Game()
         {
@@ -33,13 +33,27 @@ namespace TGOTL
             //    loadingScreens.Add(new LoadingScreen(Image.FromFile(imageNames[i]), i + 1));
             //}
             //foreach (string s in  imageNames) { MessageBox.Show(s); }
+            for (int i = 1; i <= 5; i++)
+            {
+                TrafficLight[] test = new TrafficLight[0];
+                stages[i - 1] = new Stage("s" + i, test);
+            }
         }
 
         public bool PlaystyleIsMouse { get; set; }
-        public int StagesUnlocked { get; set; }
         public Stage[] Stages { get; set; }
         public LoadingScreen[] LoadingScreens { get { return loadingScreens.ToArray(); } }
 
+        public int GetNumStagesUnlocked()
+        {
+            int stagesUnlocked = 0;
+            for (int i = 0; i < stages.Length; i++, stagesUnlocked++)
+            {
+                if (stages[i].Unlocked == false)
+                    break;
+            }
+            return stagesUnlocked;
+        }
         public int GetScreenNumber(Image image)
         {
             for (int i = 0; i < loadingScreens.Count; i++) 
