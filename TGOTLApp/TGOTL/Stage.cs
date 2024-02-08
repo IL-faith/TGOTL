@@ -9,15 +9,21 @@ namespace TGOTL
     public class Stage
     {
         TrafficLight[] trafficLights;
+        string stageName;
         Car[] cars;
         int initialScore, currentPlayerScore, bestPlayerScore, speedLimit;
+        bool unlocked;
 
-        public Stage(TrafficLight[] tl) 
+        public Stage(string stageName, TrafficLight[] tl, bool unlockedAlready = false) 
         {
             trafficLights = tl;
+            this.stageName = stageName;
+            unlocked = unlockedAlready;
         }
 
         public TrafficLight[] TrafficLights { get; }
+        public string StageName { get; }
+        public bool Unlocked { get; set; }
         public Car[] Cars { get; set; }
         public int InitialScore { get; set; }
         public int CurrentPlayerScore { get; set; }

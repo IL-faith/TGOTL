@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -89,6 +90,68 @@ namespace TGOTL
             //        }
             //    }
             //}
+        }
+
+        private void SaveGame()
+        {
+            /* save file structure:
+             * playstyle=[PLAYSTYLE]
+             * stagesUnlocked=[#STAGES_UNLOCKED]
+             * s1=[#CARS],[#CARSGOING-10],[#CARSGOING-5],[#CARSGOING-0],[#CARSGOING+5],[STAGESCORE],[PLAYER_HIGHSCORE]
+             * ...
+             * s[STAGE#OFLAST_UNLOCKED_STAGE]=[#CARS],[#CARSGOING-10],[#CARSGOING-5],[#CARSGOING-0],[#CARSGOING+5],[STAGESCORE],[PLAYER_HIGHSCORE]
+             * album:
+             * [LOADINGSCREEN#]
+             * ...
+             * [LOADINGSCREEN#]
+             */
+
+            List<string> saveInfo = new List<string>();
+            saveInfo.Add("playstyle=" + (game.PlaystyleIsMouse ? "mouse" : "keyboard")); //playstyle
+            int stagesUnlocked = game.GetNumStagesUnlocked();
+            saveInfo.Add("stagesUnlocked=" + stagesUnlocked); //stagesUnlocked
+            string stageStats = "";
+            for (int i = 0; i < stagesUnlocked; i++) 
+            {
+                Car[] cars = game.Stages[i].Cars;
+                int carsGoing10Below = 0, carsGoing5Below = 0, carsGoing0Below = 0, carsGoing5Above = 0;
+                foreach (Car car in cars) 
+                {
+                    if (car.Speed == game.Stages[i].SpeedLimit - 10)
+                        carsGoing10Below++;
+                    else if (car.Speed == game.Stages[i].SpeedLimit - 5)
+                        carsGoing5Below++;
+                    else if (car.Speed == game.Stages[i].SpeedLimit)
+                        carsGoing0Below++;
+                    else if (car.Speed == game.Stages[i].SpeedLimit + 5)
+                        carsGoing5Above++;
+                }
+                int totalCars = carsGoing0Below + carsGoing10Below + carsGoing5Below + carsGoing5Above;
+                stageStats = String.Format("s{0}={1},{2},{3},{4},{5},{6},{7}", i+1, totalCars, carsGoing10Below, carsGoing5Below, carsGoing0Below, carsGoing5Above, game.Stages[i].InitialScore, game.Stages[i].BestPlayerScore);
+            }
+            saveInfo.Add(stageStats);
+            saveInfo.Add("album:");
+            foreach (LoadingScreen ls in game.LoadingScreens)
+            {
+                if (ls.Unlocked)
+                    saveInfo.Add(ls.ScreenNumber + "");
+            }
+            SaveGameToFile(saveInfo.ToArray());
+        }
+
+        private void SaveGameToFile(string[] saveInfo)
+        {
+            string saveFilePath = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "save.txt");
+            StreamWriter saveFile = new StreamWriter(saveFilePath, false);
+            foreach (string saveLine in saveInfo)
+                saveFile.WriteLine(saveLine);
+            saveFile.Close();
+        }
+
+        private void SaveBtnClick(object sender, MouseEventArgs e)
+        {
+            if (game.PlaystyleIsMouse)
+                SaveGame();
         }
 
         private void ResumeBtnClick(object sender, MouseEventArgs e)

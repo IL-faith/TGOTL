@@ -8,5 +8,8 @@ namespace TGOTL
 {
     public class TrafficLight
     {
+
+        public TrafficLight() { }
+
     }
 }
