@@ -38,7 +38,7 @@ namespace TGOTL
             dialogues[0] = "Click/Press Enter to continue.";
             dialogues[1] = "This is a test.";
 
-            if (game.BeatGame)
+            if (game.BeatGame && !game.ShownEnding)
             {
                 dialogues[0] = "You beat the game!";
                 dialogues[1] = "Congrats!!";

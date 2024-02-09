@@ -115,18 +115,18 @@
             // lblStageScore
             // 
             this.lblStageScore.Font = new System.Drawing.Font("ROG Fonts", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStageScore.Location = new System.Drawing.Point(36, 599);
+            this.lblStageScore.Location = new System.Drawing.Point(36, 591);
             this.lblStageScore.Name = "lblStageScore";
-            this.lblStageScore.Size = new System.Drawing.Size(295, 127);
+            this.lblStageScore.Size = new System.Drawing.Size(295, 165);
             this.lblStageScore.TabIndex = 21;
             this.lblStageScore.Text = "Best score: #";
             // 
             // lblPlayerScore
             // 
             this.lblPlayerScore.Font = new System.Drawing.Font("ROG Fonts", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPlayerScore.Location = new System.Drawing.Point(813, 599);
+            this.lblPlayerScore.Location = new System.Drawing.Point(867, 591);
             this.lblPlayerScore.Name = "lblPlayerScore";
-            this.lblPlayerScore.Size = new System.Drawing.Size(295, 127);
+            this.lblPlayerScore.Size = new System.Drawing.Size(295, 165);
             this.lblPlayerScore.TabIndex = 20;
             this.lblPlayerScore.Text = "Your score: #";
             // 
@@ -228,6 +228,7 @@
             this.Name = "StageSelectionScreen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "The Game of Traffic Lights";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyboardKeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.pbPauseBtn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbStagePreview)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbNextArrow)).EndInit();
