@@ -14,103 +14,150 @@ namespace TGOTL
     public partial class ResultsScreen : Form
     {
         Game game;
+        Label[] selectChoices = new Label[3];
+        int selectChoiceSelected = -1;
         public ResultsScreen(Point formPosition, Game g)
         {
             InitializeComponent();
             this.Location = formPosition;
             game = g;
-
-            Random rnd = new Random();
-            if (rnd.Next(2) == 1)
+            
+            int i = 0;
+            foreach (Control control in this.Controls)
             {
-                lblPassed.Visible = false;
-                lblNextStageBtn.Visible = false;
-                lblSelect1NextStageBtn.Visible = false;
+                if (control is Label && control.Tag != null && control.Tag.Equals("select"))
+                {
+                    control.Visible = false;
+                    selectChoices[i] = (Label)control;
+                    i++;
+                }
+            }
+            SortSelectChoices();
+
+            GetResults();
+
+            if (game.CurrentStage == game.Stages.Length - 1)
+            {
                 lblSelect2RetryBtn.Size = lblSelect1NextStageBtn.Size;
                 lblSelect2RetryBtn.Location = lblSelect1NextStageBtn.Location;
                 pbRetryBtn.Size = lblNextStageBtn.Size;
                 pbRetryBtn.Location = lblNextStageBtn.Location;
             }
-            else
+        }
+
+        private void GetResults()
+        {
+            int playerScore = game.Stages[game.CurrentStage].CurrentPlayerScore, stageScore = game.Stages[game.CurrentStage].InitialScore;
+
+            lblPlayerScore.Text = lblPlayerScore.Text.Replace("#", playerScore+"");
+            lblStageScore.Text = lblStageScore.Text.Replace("#", stageScore+"");
+
+            if (playerScore < stageScore)
+            {
                 lblFailed.Visible = false;
+                if (game.CurrentStage != game.Stages.Length - 1)
+                    game.Stages[game.CurrentStage+1].Unlocked = true;
+                else if (!game.BeatGame)
+                        game.BeatGame = true;
+            }
+            else
+            {
+                lblPassed.Visible = false;
+                lblNextStageBtn.Visible = false;
+                lblSelect2RetryBtn.Size = lblSelect1NextStageBtn.Size;
+                lblSelect2RetryBtn.Location = lblSelect1NextStageBtn.Location;
+                pbRetryBtn.Size = lblNextStageBtn.Size;
+                pbRetryBtn.Location = lblNextStageBtn.Location;
+            }
+
+            if (playerScore < game.Stages[game.CurrentStage].BestPlayerScore)
+            {
+                game.Stages[game.CurrentStage].BestPlayerScore = playerScore;
+                MessageBox.Show("new high score");
+            }
+            else
+                MessageBox.Show("no new high score");
+        }
+
+        private void SortSelectChoices()
+        {
+            for (int i = 0; i < selectChoices.Length; i++)
+            {
+                for (int j = i + 1; j < selectChoices.Length; j++)
+                {
+                    if (selectChoices[i].Name.CompareTo(selectChoices[j].Name) > 0)
+                    {
+                        Label temp = selectChoices[i];
+                        selectChoices[i] = selectChoices[j];
+                        selectChoices[j] = temp;
+                    }
+                }
+            }
         }
 
         private void KeyboardKeyDown(object sender, KeyEventArgs e)
         {
-            //if (playstyle.Equals("keyboard"))
-            //{
-            //    int previousChoice = menuChoiceSelected;
-            //    bool arrowKeyPressed = true;
+            if (!game.PlaystyleIsMouse)
+            {
+                int previousChoice = selectChoiceSelected;
+                bool arrowKeyPressed = true;
 
-            //    if (e.KeyCode == Keys.Down || e.KeyCode == Keys.Right)
-            //    {
-            //        menuChoiceSelected += (menuChoiceSelected == 4 ? -4 : 1);
-            //        while (menuChoices[menuChoiceSelected].Font.Strikeout)
-            //            menuChoiceSelected++;
-            //    }
-            //    else if (e.KeyCode == Keys.Up || e.KeyCode == Keys.Left)
-            //    {
-            //        menuChoiceSelected -= (menuChoiceSelected == 0 ? -4 : (menuChoiceSelected == -1 ? -5 : 1));
-            //        while (menuChoices[menuChoiceSelected].Font.Strikeout)
-            //            menuChoiceSelected--;
-            //    }
-            //    else
-            //        arrowKeyPressed = false;
+                int lastChoiceAvailable = (lblFailed.Visible? 1 : 2);
 
-            //    if (arrowKeyPressed)
-            //    {
-            //        if (previousChoice != -1)
-            //            menuChoices[previousChoice].ForeColor = Color.Black;
-            //        menuChoices[menuChoiceSelected].ForeColor = Color.DeepSkyBlue;
-            //    }
-            //    else if ((e.KeyCode == Keys.Enter || e.KeyCode == Keys.Space) && menuChoiceSelected != -1)
-            //    {
-            //        if (menuChoices[menuChoiceSelected].Name.Equals("lblPlaystyleButton"))
-            //        {
-            //            playstyle = "mouse";
-            //            lblMenu5PlaystyleBtn.Text = "Mode: " + playstyle;
-            //            menuChoiceSelected = -1;
-            //            lblMenu5PlaystyleBtn.ForeColor = Color.Black;
-            //        }
-            //        switch (menuChoiceSelected)
-            //        {
-            //            case 0:
-            //                StoryScreen newGame = new StoryScreen(this.Location, playstyle, false);
-            //                newGame.Show();
-            //                this.Close();
-            //                break;
-            //            case 1:
-            //                StageSelectionScreen loadGame = new StageSelectionScreen(this.Location/*, LoadGameSave()*/);
-            //                loadGame.Show();
-            //                this.Close();
-            //                break;
-            //            case 2:
-            //                AlbumScreen viewAlbum = new AlbumScreen(this.Location);
-            //                viewAlbum.Show();
-            //                this.Close();
-            //                break;
-            //            case 3:
-            //                TutorialScreen viewTutorial = new TutorialScreen(this.Location);
-            //                viewTutorial.Show();
-            //                this.Close();
-            //                break;
-            //            case 4:
-            //                playstyle = "mouse";
-            //                lblMenu5PlaystyleBtn.Text = "Mode: " + playstyle;
-            //                menuChoiceSelected = -1;
-            //                break;
-            //        }
-            //    }
-            //}
+                if (e.KeyCode == Keys.Down || e.KeyCode == Keys.Right)
+                    selectChoiceSelected += (selectChoiceSelected == lastChoiceAvailable ? -lastChoiceAvailable : 1);
+                else if (e.KeyCode == Keys.Up || e.KeyCode == Keys.Left)
+                    selectChoiceSelected -= (selectChoiceSelected == 0 ? -lastChoiceAvailable : (selectChoiceSelected == -1 ? -(lastChoiceAvailable+1) : 1));
+                else
+                    arrowKeyPressed = false;
+
+                if (arrowKeyPressed)
+                {
+                    if (previousChoice != -1)
+                        selectChoices[previousChoice].Visible = false;
+                    selectChoices[selectChoiceSelected].Visible = true;
+                }
+                else if ((e.KeyCode == Keys.Enter || e.KeyCode == Keys.Space) && selectChoiceSelected != -1)
+                {
+                    switch (selectChoiceSelected)
+                    {
+                        case 0:
+                            StageSelectionScreen stageSelect = new StageSelectionScreen(this.Location, game);
+                            stageSelect.Show();
+                            this.Close();
+                            break;
+                        case 1:
+                            game.CurrentStage += 1;
+                            NonPrepScreen nextStage = new NonPrepScreen(this.Location, game);
+                            nextStage.Show();
+                            this.Close();
+                            break;
+                        case 2:
+                            NonPrepScreen retryStage = new NonPrepScreen(this.Location, game);
+                            retryStage.Show();
+                            this.Close();
+                            break;
+                    }
+                }
+            }
         }
 
         private void StageSelectBtnClick(object sender, MouseEventArgs e)
         {
             if (game.PlaystyleIsMouse)
             {
-                StageSelectionScreen stageSelect = new StageSelectionScreen(this.Location, game);
-                stageSelect.Show();
-                this.Close();
+                if (game.BeatGame && !game.ShownEnding)
+                {
+                    StoryScreen showEnd = new StoryScreen(this.Location, game, false);
+                    showEnd.Show();
+                    this.Close();
+                }
+                else
+                {
+                    StageSelectionScreen stageSelect = new StageSelectionScreen(this.Location, game);
+                    stageSelect.Show();
+                    this.Close();
+                }
             }
         }
 
@@ -118,6 +165,7 @@ namespace TGOTL
         {
             if (game.PlaystyleIsMouse)
             {
+                game.CurrentStage += 1;
                 NonPrepScreen nextStage = new NonPrepScreen(this.Location, game);
                 nextStage.Show();
                 this.Close();

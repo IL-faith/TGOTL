@@ -12,8 +12,8 @@ namespace TGOTL
 {
     public class Game
     {
-        bool playstyleIsMouse = true;
-        int albumIndex = 0;
+        bool playstyleIsMouse = true, beatGame = false, shownEnding;
+        int albumIndex = 0, currentStage = -1;
         List<LoadingScreen> loadingScreens = new List<LoadingScreen>();
         Stage[] stages = new Stage[5];
 
@@ -38,10 +38,32 @@ namespace TGOTL
                 TrafficLight[] test = new TrafficLight[0];
                 stages[i - 1] = new Stage("s" + i, test);
             }
+            stages[0].Unlocked = true;
+
+            stages[0].InitialScore = 10;
+            stages[1].InitialScore = 30;
+            stages[2].InitialScore = 50;
+            stages[0].CurrentPlayerScore = 0;
+            stages[1].CurrentPlayerScore = 20;
+            stages[2].CurrentPlayerScore = 400;
+            stages[0].BestPlayerScore = 0;
+            stages[1].BestPlayerScore = 25;
+            stages[2].BestPlayerScore = 10;
+            stages[2].CurrentPlayerScore = 1;
+            stages[3].CurrentPlayerScore = 1;
+            stages[4].CurrentPlayerScore = 1;
+            stages[2].InitialScore = 2;
+            stages[3].InitialScore = 2;
+            stages[4].InitialScore = 2;
         }
 
+        //it seems { get; set; } doesn't work with (abstract) object types, only primitives...
+
         public bool PlaystyleIsMouse { get; set; }
-        public Stage[] Stages { get; set; }
+        public bool BeatGame { get; set; }
+        public bool ShownEnding { get; set; }
+        public Stage[] Stages { get { return stages; } set { stages = value; } }
+        public int CurrentStage { get; set; }
         public LoadingScreen[] LoadingScreens { get { return loadingScreens.ToArray(); } }
 
         public int GetNumStagesUnlocked()

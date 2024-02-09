@@ -42,7 +42,7 @@ namespace TGOTL
             lblMenu3AlbumBtn.Font = lblMenu1StartBtn.Font;
             lblMenu3AlbumBtn.ForeColor = Color.Black;
             firstLoad = false;
-            CheckSaveFile();
+            //CheckSaveFile();
         }
 
         private void CheckSaveFile()
@@ -92,7 +92,7 @@ namespace TGOTL
 
         private void LoadGameSave()
         {
-            game = new Game();
+            //game = new Game();
             string saveFilePath = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "save.txt");
             if (File.Exists(saveFilePath)) 
             {
@@ -249,13 +249,13 @@ namespace TGOTL
                 }
                 else if ((e.KeyCode == Keys.Enter || e.KeyCode == Keys.Space) && menuChoiceSelected != -1)
                 {
-                    if (menuChoices[menuChoiceSelected].Name.Equals("lblPlaystyleButton"))
-                    {
-                        playstyle = "mouse";
-                        lblMenu5PlaystyleBtn.Text = "Mode: " + playstyle;
-                        menuChoiceSelected = -1;
-                        lblMenu5PlaystyleBtn.ForeColor = Color.Black;
-                    }
+                    //if (menuChoices[menuChoiceSelected].Name.Equals("lblPlaystyleButton"))
+                    //{
+                    //    playstyle = "mouse";
+                    //    lblMenu5PlaystyleBtn.Text = "Mode: " + playstyle;
+                    //    menuChoiceSelected = -1;
+                    //    lblMenu5PlaystyleBtn.ForeColor = Color.Black;
+                    //}
                     switch (menuChoiceSelected)
                     {
                         case 0:
@@ -290,6 +290,7 @@ namespace TGOTL
                             playstyle = "mouse";
                             lblMenu5PlaystyleBtn.Text = "Mode: " + playstyle;
                             menuChoiceSelected = -1;
+                            lblMenu5PlaystyleBtn.ForeColor = Color.Black;
                             game.PlaystyleIsMouse = true;
                             break;
                     }

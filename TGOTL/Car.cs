@@ -10,7 +10,7 @@ namespace TGOTL
     public class Car
     {
         // 4 speeds, speed limit -10, -5, +0 (equal to), +5
-        int speed;
+        int speed, timeStopped;
         Color color;
         public Car(int carSpeed)
         {
@@ -23,6 +23,7 @@ namespace TGOTL
         }
 
         public int Speed { get; }
+        public int TimeStopped { get; set; }
         public Color Color { get; }
 
         private void SetColor()

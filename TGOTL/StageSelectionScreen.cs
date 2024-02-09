@@ -24,6 +24,9 @@ namespace TGOTL
             lblStageLockedMessage.Visible = false;
             pbPrevArrow.Visible = false;
             ClearSelects();
+
+            if (game.BeatGame && !game.ShownEnding)
+                game.ShownEnding = true;
         }
 
         private void ClearSelects()
@@ -108,6 +111,7 @@ namespace TGOTL
         {
             if (game.PlaystyleIsMouse)
             {
+                stageNum--;
                 TitleScreen titleScreen = new TitleScreen(this.Location, game);
                 titleScreen.Show();
                 this.Close();
@@ -118,7 +122,8 @@ namespace TGOTL
         {
             if (game.PlaystyleIsMouse)
             {
-                NonPrepScreen prePrep = new NonPrepScreen(this.Location, game/*, selectedStage*/);
+                game.CurrentStage = stageNum-1;
+                NonPrepScreen prePrep = new NonPrepScreen(this.Location, game);
                 prePrep.Show();
                 this.Close();
             }
