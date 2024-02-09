@@ -37,6 +37,13 @@ namespace TGOTL
             dialogues = new string[2];
             dialogues[0] = "Click/Press Enter to continue.";
             dialogues[1] = "This is a test.";
+
+            if (game.BeatGame)
+            {
+                dialogues[0] = "You beat the game!";
+                dialogues[1] = "Congrats!!";
+            }
+
             lblDialogueBox.Text = dialogues[0];
         }
 
@@ -47,8 +54,8 @@ namespace TGOTL
                 lblDialogueBox.Text = dialogues[dialogueNum];
             else
             {
-                StageSelectionScreen newGame = new StageSelectionScreen(this.Location, game);
-                newGame.Show();
+                StageSelectionScreen stageSelection = new StageSelectionScreen(this.Location, game);
+                stageSelection.Show();
                 this.Close();
             }
         }
