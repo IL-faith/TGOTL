@@ -180,6 +180,7 @@
             this.Name = "ResultsScreen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "The Game of Traffic Lights";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyboardKeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.pbRetryBtn)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

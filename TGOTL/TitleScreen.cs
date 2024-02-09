@@ -41,6 +41,7 @@ namespace TGOTL
             this.Location = formPosition;
             lblMenu3AlbumBtn.Font = lblMenu1StartBtn.Font;
             lblMenu3AlbumBtn.ForeColor = Color.Black;
+            lblMenu5PlaystyleBtn.Text = "Mode: " + playstyle;
             firstLoad = false;
             //CheckSaveFile();
         }

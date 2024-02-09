@@ -12,8 +12,10 @@ namespace TGOTL
 {
     public partial class StageSelectionScreen : Form
     {
-        int bestScore, stageScore, stageNum = 1;
-        Game game; 
+        int stageNum = 1;
+        Game game;
+        Label[] selectChoices = new Label[5];
+        int selectChoiceSelected = -1;
 
         public StageSelectionScreen(Point formPosition, Game g)
         {
@@ -23,10 +25,40 @@ namespace TGOTL
             game = g;
             lblStageLockedMessage.Visible = false;
             pbPrevArrow.Visible = false;
-            ClearSelects();
+            pbStagePreview.BackColor = Color.DarkSeaGreen; //pbStagePreview = game.Stages[stageNum-1].Image;
+            //lblPlayerScore.Text = lblPlayerScore.Text.Replace("#", game.Stages[stageNum - 1].BestPlayerScore + "");
+            //lblPlayerScore.Text = lblPlayerScore.Text.Replace("#", game.Stages[stageNum - 1].InitialScore + "");
+            //ClearSelects();
+            int i = 0;
+            foreach (Control control in this.Controls)
+            {
+                if (control is Label && control.Tag != null && control.Tag.Equals("select"))
+                {
+                    control.Visible = false;
+                    selectChoices[i] = (Label)control;
+                    i++;
+                }
+            }
+            SortSelectChoices();
 
             if (game.BeatGame && !game.ShownEnding)
                 game.ShownEnding = true;
+        }
+
+        private void SortSelectChoices()
+        {
+            for (int i = 0; i < selectChoices.Length; i++)
+            {
+                for (int j = i + 1; j < selectChoices.Length; j++)
+                {
+                    if (selectChoices[i].Name.CompareTo(selectChoices[j].Name) > 0)
+                    {
+                        Label temp = selectChoices[i];
+                        selectChoices[i] = selectChoices[j];
+                        selectChoices[j] = temp;
+                    }
+                }
+            }
         }
 
         private void ClearSelects()
@@ -40,78 +72,113 @@ namespace TGOTL
 
         private void KeyboardKeyDown(object sender, KeyEventArgs e)
         {
-            //if (playstyle.Equals("keyboard"))
-            //{
-            //    int previousChoice = menuChoiceSelected;
-            //    bool arrowKeyPressed = true;
+            if (!game.PlaystyleIsMouse)
+            {
+                int previousChoice = selectChoiceSelected;
+                bool arrowKeyPressed = true;
 
-            //    if (e.KeyCode == Keys.Down || e.KeyCode == Keys.Right)
-            //    {
-            //        menuChoiceSelected += (menuChoiceSelected == 4 ? -4 : 1);
-            //        while (menuChoices[menuChoiceSelected].Font.Strikeout)
-            //            menuChoiceSelected++;
-            //    }
-            //    else if (e.KeyCode == Keys.Up || e.KeyCode == Keys.Left)
-            //    {
-            //        menuChoiceSelected -= (menuChoiceSelected == 0 ? -4 : (menuChoiceSelected == -1 ? -5 : 1));
-            //        while (menuChoices[menuChoiceSelected].Font.Strikeout)
-            //            menuChoiceSelected--;
-            //    }
-            //    else
-            //        arrowKeyPressed = false;
+                if (e.KeyCode == Keys.Down || e.KeyCode == Keys.Right)
+                {
+                    selectChoiceSelected += (selectChoiceSelected == 4 ? -4 : 1);
+                    if ((selectChoiceSelected == 3 && !pbPrevArrow.Visible) || (selectChoiceSelected == 4 && !pbNextArrow.Visible))
+                        selectChoiceSelected += (selectChoiceSelected == 4? -4:1);
+                }
+                else if (e.KeyCode == Keys.Up || e.KeyCode == Keys.Left)
+                { 
+                    selectChoiceSelected -= (selectChoiceSelected == 0 ? -4 : (selectChoiceSelected == -1 ? -5 : 1));
+                    if ((selectChoiceSelected == 3 && !pbPrevArrow.Visible) || (selectChoiceSelected == 4 && !pbNextArrow.Visible))
+                        selectChoiceSelected--;
+                }
+                else
+                    arrowKeyPressed = false;
 
-            //    if (arrowKeyPressed)
-            //    {
-            //        if (previousChoice != -1)
-            //            menuChoices[previousChoice].ForeColor = Color.Black;
-            //        menuChoices[menuChoiceSelected].ForeColor = Color.DeepSkyBlue;
-            //    }
-            //    else if ((e.KeyCode == Keys.Enter || e.KeyCode == Keys.Space) && menuChoiceSelected != -1)
-            //    {
-            //        if (menuChoices[menuChoiceSelected].Name.Equals("lblPlaystyleButton"))
-            //        {
-            //            playstyle = "mouse";
-            //            lblMenu5PlaystyleBtn.Text = "Mode: " + playstyle;
-            //            menuChoiceSelected = -1;
-            //            lblMenu5PlaystyleBtn.ForeColor = Color.Black;
-            //        }
-            //        switch (menuChoiceSelected)
-            //        {
-            //            case 0:
-            //                StoryScreen newGame = new StoryScreen(this.Location, playstyle, false);
-            //                newGame.Show();
-            //                this.Close();
-            //                break;
-            //            case 1:
-            //                StageSelectionScreen loadGame = new StageSelectionScreen(this.Location/*, LoadGameSave()*/);
-            //                loadGame.Show();
-            //                this.Close();
-            //                break;
-            //            case 2:
-            //                AlbumScreen viewAlbum = new AlbumScreen(this.Location);
-            //                viewAlbum.Show();
-            //                this.Close();
-            //                break;
-            //            case 3:
-            //                TutorialScreen viewTutorial = new TutorialScreen(this.Location);
-            //                viewTutorial.Show();
-            //                this.Close();
-            //                break;
-            //            case 4:
-            //                playstyle = "mouse";
-            //                lblMenu5PlaystyleBtn.Text = "Mode: " + playstyle;
-            //                menuChoiceSelected = -1;
-            //                break;
-            //        }
-            //    }
-            //}
+                if (arrowKeyPressed)
+                {
+                    if (previousChoice != -1)
+                        selectChoices[previousChoice].Visible = false;
+                    selectChoices[selectChoiceSelected].Visible = true;
+                }
+                else if ((e.KeyCode == Keys.Enter || e.KeyCode == Keys.Space) && selectChoiceSelected != -1)
+                {
+                    switch (selectChoiceSelected)
+                    {
+                        case 0:
+                            TitleScreen titleScreen = new TitleScreen(this.Location, game);
+                            titleScreen.Show();
+                            this.Close();
+                            break;
+                        case 1:
+                            PauseScreen pause = new PauseScreen(this, this.Location, game);
+                            pause.Show();
+                            this.Hide();
+                            break;
+                        case 2:
+                            game.CurrentStage = stageNum - 1;
+                            if (game.Stages[game.CurrentStage].Unlocked)
+                            {
+                                NonPrepScreen prePrep = new NonPrepScreen(this.Location, game);
+                                prePrep.Show();
+                                this.Close();
+                            }
+                            break;
+                        case 3:
+                            stageNum--;
+                            if (stageNum == 1)
+                            {
+                                pbPrevArrow.Visible = false;
+                                lblSelect3PrevArrow.Visible = false;
+                                selectChoiceSelected = 2;
+                            }
+                            else if (stageNum == game.Stages.Length - 1)
+                                pbNextArrow.Visible = true;
+
+                            if (game.Stages[stageNum - 1].Unlocked)
+                            {
+                                if (lblStageLockedMessage.Visible)
+                                {
+                                    lblStageLockedMessage.Visible = false;
+                                    pbStagePreview.BackColor = Color.DarkSeaGreen; //pbStagePreview.Image = //lock.png
+                                }
+                                //lblPlayerScore.Text = lblPlayerScore.Text.Replace(game.Stages[stageNum - 2].BestPlayerScore + "", game.Stages[stageNum - 1].BestPlayerScore + "");
+                                //lblStageScore.Text = lblStageScore.Text.Replace(game.Stages[stageNum - 2].InitialScore + "", game.Stages[stageNum - 1].InitialScore + "");
+                            }
+                            break;
+                        case 4:
+                            stageNum++;
+                            if (stageNum == game.Stages.Length)
+                            {
+                                pbNextArrow.Visible = false;
+                                lblSelect4NextArrow.Visible = false;
+                                selectChoiceSelected = 2;
+                            }
+                            else if (stageNum == 2)
+                                pbPrevArrow.Visible = true;
+
+                            if (!game.Stages[stageNum - 1].Unlocked)
+                            {
+                                if (!lblStageLockedMessage.Visible)
+                                {
+                                    lblStageLockedMessage.Visible = true;
+                                    pbStagePreview.BackColor = Color.Black; //pbStagePreview.Image = //lock.png
+                                                                            //lblPlayerScore.Text = lblPlayerScore.Text.Replace(game.Stages[stageNum - 2].BestPlayerScore + "", "- -");
+                                                                            //lblStageScore.Text = lblStageScore.Text.Replace(game.Stages[stageNum - 2].InitialScore + "", "- -");
+                                }
+                            }
+                            else
+                            {
+                                //lblPlayerScore.Text = lblPlayerScore.Text.Replace(game.Stages[stageNum - 2].BestPlayerScore + "", game.Stages[stageNum - 1].BestPlayerScore + "");
+                                //lblStageScore.Text = lblStageScore.Text.Replace(game.Stages[stageNum - 2].InitialScore + "", game.Stages[stageNum - 1].InitialScore + "");
+                            }
+                            break;
+                    }
+                }
+            }
         }
 
         private void BackBtnClick(object sender, MouseEventArgs e)
         {
             if (game.PlaystyleIsMouse)
             {
-                stageNum--;
                 TitleScreen titleScreen = new TitleScreen(this.Location, game);
                 titleScreen.Show();
                 this.Close();
@@ -123,9 +190,12 @@ namespace TGOTL
             if (game.PlaystyleIsMouse)
             {
                 game.CurrentStage = stageNum-1;
-                NonPrepScreen prePrep = new NonPrepScreen(this.Location, game);
-                prePrep.Show();
-                this.Close();
+                if (game.Stages[game.CurrentStage].Unlocked)
+                {
+                    NonPrepScreen prePrep = new NonPrepScreen(this.Location, game);
+                    prePrep.Show();
+                    this.Close();
+                }
             }
         }
 
@@ -144,12 +214,25 @@ namespace TGOTL
             if (game.PlaystyleIsMouse)
             {
                 stageNum++;
-                if (stageNum == 5)
+                if (stageNum == game.Stages.Length)
                     pbNextArrow.Visible = false;
-                if (stageNum == 2)
-                {
+                else if (stageNum == 2)
                     pbPrevArrow.Visible = true;
-                    lblStageLockedMessage.Visible = true;
+
+                if (!game.Stages[stageNum - 1].Unlocked)
+                {
+                    if (!lblStageLockedMessage.Visible)
+                    {
+                        lblStageLockedMessage.Visible = true;
+                        pbStagePreview.BackColor = Color.Black; //pbStagePreview.Image = //lock.png
+                        //lblPlayerScore.Text = lblPlayerScore.Text.Replace(game.Stages[stageNum - 2].BestPlayerScore + "", "- -");
+                        //lblStageScore.Text = lblStageScore.Text.Replace(game.Stages[stageNum - 2].InitialScore + "", "- -");
+                    }
+                }
+                else
+                {
+                    //lblPlayerScore.Text = lblPlayerScore.Text.Replace(game.Stages[stageNum - 2].BestPlayerScore + "", game.Stages[stageNum - 1].BestPlayerScore + "");
+                    //lblStageScore.Text = lblStageScore.Text.Replace(game.Stages[stageNum - 2].InitialScore + "", game.Stages[stageNum - 1].InitialScore + "");
                 }
             }
         }
@@ -159,17 +242,22 @@ namespace TGOTL
             if (game.PlaystyleIsMouse)
             {
                 stageNum--;
-                if (stageNum == 0)
-                {
+                if (stageNum == 1)
                     pbPrevArrow.Visible = false;
-                    lblStageLockedMessage.Visible = false;
-                }
-                if (stageNum == 4)
+                else if (stageNum == game.Stages.Length-1)
                     pbNextArrow.Visible = true;
+
+                if (game.Stages[stageNum - 1].Unlocked)
+                {
+                    if (lblStageLockedMessage.Visible)
+                    {
+                        lblStageLockedMessage.Visible = false;
+                        pbStagePreview.BackColor = Color.DarkSeaGreen; //pbStagePreview.Image = //lock.png
+                    }
+                    //lblPlayerScore.Text = lblPlayerScore.Text.Replace(game.Stages[stageNum - 2].BestPlayerScore + "", game.Stages[stageNum - 1].BestPlayerScore + "");
+                    //lblStageScore.Text = lblStageScore.Text.Replace(game.Stages[stageNum - 2].InitialScore + "", game.Stages[stageNum - 1].InitialScore + "");
+                }
             }
         }
-
-        public int BestScore { get; set; }
-        public int StageScore { get; set; }
     }
 }
