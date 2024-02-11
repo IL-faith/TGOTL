@@ -24,11 +24,11 @@ namespace TGOTL
 
         
 
-        public TrafficLight[] OldTrafficLights { get; }
-        public TrafficLight[] NewTrafficLights { get; set; }
+        public TrafficLight[] OldTrafficLights { get { return oldTrafficLights; } }
+        public TrafficLight[] NewTrafficLights { get { return newTrafficLights; } set { newTrafficLights = value; } }
         public string StageName { get; }
         public bool Unlocked { get; set; }
-        public Car[] Cars { get; set; }
+        public Car[] Cars { get { return cars; } set { cars = value; } }
         public int InitialScore { get; set; }
         public int CurrentPlayerScore { get; set; }
         public int BestPlayerScore { get; set; }

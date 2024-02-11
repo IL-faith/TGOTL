@@ -13,7 +13,7 @@ namespace TGOTL
 {
     public partial class StoryScreen : Form
     {
-        bool playstyleIsMouse, isLoadingScreen;
+        bool isLoadingScreen;
         int dialogueNum = 0;
         string[] dialogues;
         Game game;
@@ -62,12 +62,13 @@ namespace TGOTL
 
         private void DialogueClicked(object sender, MouseEventArgs e)
         {
-            GetNextDialog();
+            if (game.PlaystyleIsMouse)
+                GetNextDialog();
         }
 
         private void KeyboardKeyPressed(object sender, KeyEventArgs e)
         {
-            if (!playstyleIsMouse)
+            if (!game.PlaystyleIsMouse)
             {
                 if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Space)
                 {
