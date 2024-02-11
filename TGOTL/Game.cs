@@ -37,6 +37,7 @@ namespace TGOTL
             {
                 TrafficLight[] test = new TrafficLight[0];
                 stages[i - 1] = new Stage("s" + i, test);
+                stages[i - 1].Cars = new Car[0];
             }
             stages[0].Unlocked = true;
 

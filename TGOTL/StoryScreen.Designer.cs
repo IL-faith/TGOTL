@@ -66,6 +66,7 @@
             this.Name = "StoryScreen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "The Game of Traffic Lights";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyboardKeyPressed);
             ((System.ComponentModel.ISupportInitialize)(this.pbImage)).EndInit();
             this.ResumeLayout(false);
 
