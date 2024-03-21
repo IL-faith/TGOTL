@@ -190,7 +190,13 @@ namespace TGOTL
             if (game.PlaystyleIsMouse)
             {
                 game.CurrentStage = stageNum-1;
-                if (game.Stages[game.CurrentStage].Unlocked)
+                if (stageNum == 1)
+                {
+                    Stage1Prep s1 = new Stage1Prep(this.Location, game);
+                    s1.Show();
+                    this.Close();
+                }
+                else if (game.Stages[game.CurrentStage].Unlocked)
                 {
                     NonPrepScreen prePrep = new NonPrepScreen(this.Location, game);
                     prePrep.Show();
