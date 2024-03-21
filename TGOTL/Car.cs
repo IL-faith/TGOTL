@@ -12,6 +12,7 @@ namespace TGOTL
         // 4 speeds, speed limit -10, -5, +0 (equal to), +5
         int speed, timeStopped;
         Color color;
+        Point location;
         public Car(int carSpeed)
         {
             speed = carSpeed;
@@ -24,7 +25,8 @@ namespace TGOTL
 
         public int Speed { get; }
         public int TimeStopped { get; set; }
-        public Color Color { get; }
+        public Color Color { get { return color; } }
+        public Point Location { get { return location; } set { location = value; } }
 
         private void SetColor()
         {
@@ -55,7 +57,7 @@ namespace TGOTL
                 case 3:
                     speed = speedLimit; break;
                 case 4:
-                    speed = speedLimit; break;
+                    speed = speedLimit + 5; break;
             }
         }
     }
