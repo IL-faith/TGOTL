@@ -75,6 +75,7 @@
             // pbStagePreview
             // 
             this.pbStagePreview.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.pbStagePreview.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pbStagePreview.Location = new System.Drawing.Point(296, 155);
             this.pbStagePreview.Name = "pbStagePreview";
             this.pbStagePreview.Size = new System.Drawing.Size(530, 408);

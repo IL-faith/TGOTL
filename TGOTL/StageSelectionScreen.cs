@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TGOTL.Properties;
 
 namespace TGOTL
 {
@@ -198,9 +199,34 @@ namespace TGOTL
                 }
                 else if (game.Stages[game.CurrentStage].Unlocked)
                 {
-                    NonPrepScreen prePrep = new NonPrepScreen(this.Location, game);
-                    prePrep.Show();
-                    this.Close();
+                    //NonPrepScreen prePrep = new NonPrepScreen(this.Location, game);
+                    //prePrep.Show();
+                    //this.Close();
+
+                    if (stageNum == 2)
+                    {
+                        Stage2Prep s2 = new Stage2Prep(this.Location, game);
+                        s2.Show();
+                        this.Close();
+                    }
+                    else if (stageNum == 3)
+                    {
+                        Stage3Prep s3 = new Stage3Prep(this.Location, game);
+                        s3.Show();
+                        this.Close();
+                    }
+                    else if (stageNum == 4)
+                    {
+                        Stage4Prep s4 = new Stage4Prep(this.Location, game);
+                        s4.Show();
+                        this.Close();
+                    }
+                    else if (stageNum == 5)
+                    {
+                        Stage5Prep s5 = new Stage5Prep(this.Location, game);
+                        s5.Show();
+                        this.Close();
+                    }
                 }
             }
         }
@@ -237,6 +263,7 @@ namespace TGOTL
                 }
                 else
                 {
+                    pbStagePreview.BackgroundImage = game.Stages[stageNum - 1].GetImage;
                     //lblPlayerScore.Text = lblPlayerScore.Text.Replace(game.Stages[stageNum - 2].BestPlayerScore + "", game.Stages[stageNum - 1].BestPlayerScore + "");
                     //lblStageScore.Text = lblStageScore.Text.Replace(game.Stages[stageNum - 2].InitialScore + "", game.Stages[stageNum - 1].InitialScore + "");
                 }
@@ -260,6 +287,7 @@ namespace TGOTL
                         lblStageLockedMessage.Visible = false;
                         pbStagePreview.BackColor = Color.DarkSeaGreen; //pbStagePreview.Image = //lock.png
                     }
+                    pbStagePreview.BackgroundImage = game.Stages[stageNum - 1].GetImage;
                     //lblPlayerScore.Text = lblPlayerScore.Text.Replace(game.Stages[stageNum - 2].BestPlayerScore + "", game.Stages[stageNum - 1].BestPlayerScore + "");
                     //lblStageScore.Text = lblStageScore.Text.Replace(game.Stages[stageNum - 2].InitialScore + "", game.Stages[stageNum - 1].InitialScore + "");
                 }

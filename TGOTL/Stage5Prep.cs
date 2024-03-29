@@ -15,7 +15,7 @@ using System.Windows.Forms;
 
 namespace TGOTL
 {
-    public partial class Stage1Prep : Form
+    public partial class Stage5Prep : Form
     {
         struct CCar
         {
@@ -56,7 +56,7 @@ namespace TGOTL
         Random rnd = new Random();
         int numCarsToMake, numCarsMade = 0, stageSpeedLimit;
 
-        public Stage1Prep(Point formPosition, Game g)
+        public Stage5Prep(Point formPosition, Game g)
         {
             InitializeComponent();
             
@@ -75,7 +75,7 @@ namespace TGOTL
             pbH2Car1.Visible = false;
 
             stageSpeedLimit = 70;
-            numCarsToMake = 5;//rnd.Next(100) + 60;
+            numCarsToMake = 15;//rnd.Next(100) + 60;
             GenerateCars();
             GroupCars();
 

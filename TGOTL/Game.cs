@@ -40,22 +40,29 @@ namespace TGOTL
                 stages[i - 1].Cars = new Car[0];
             }
             stages[0].Unlocked = true;
+            //stages[3].Unlocked = true;
 
-            stages[0].InitialScore = 10;
-            stages[1].InitialScore = 30;
-            stages[2].InitialScore = 50;
-            stages[0].CurrentPlayerScore = 0;
-            stages[1].CurrentPlayerScore = 20;
-            stages[2].CurrentPlayerScore = 400;
-            stages[0].BestPlayerScore = 0;
-            stages[1].BestPlayerScore = 25;
-            stages[2].BestPlayerScore = 10;
-            stages[2].CurrentPlayerScore = 1;
-            stages[3].CurrentPlayerScore = 1;
-            stages[4].CurrentPlayerScore = 1;
-            stages[2].InitialScore = 2;
-            stages[3].InitialScore = 2;
-            stages[4].InitialScore = 2;
+            //stages[0].InitialScore = 10;
+            //stages[1].InitialScore = 30;
+            //stages[2].InitialScore = 50;
+            //stages[0].CurrentPlayerScore = 0;
+            //stages[1].CurrentPlayerScore = 20;
+            //stages[2].CurrentPlayerScore = 400;
+            //stages[0].BestPlayerScore = 0;
+            //stages[1].BestPlayerScore = 25;
+            //stages[2].BestPlayerScore = 10;
+            //stages[2].CurrentPlayerScore = 1;
+            //stages[3].CurrentPlayerScore = 1;
+            //stages[4].CurrentPlayerScore = 1;
+            //stages[2].InitialScore = 2;
+            //stages[3].InitialScore = 2;
+            //stages[4].InitialScore = 2;
+
+            stages[0].GetImage = Image.FromFile(@"C:\Users\faith\Documents\Senior Project\TGOTL\test assets\stage1.png");
+            stages[1].GetImage = Image.FromFile(@"C:\Users\faith\Documents\Senior Project\TGOTL\test assets\stage2.png");
+            stages[2].GetImage = Image.FromFile(@"C:\Users\faith\Documents\Senior Project\TGOTL\test assets\stage1.png");
+            stages[3].GetImage = Image.FromFile(@"C:\Users\faith\Documents\Senior Project\TGOTL\test assets\stage4.png");
+            stages[4].GetImage = Image.FromFile(@"C:\Users\faith\Documents\Senior Project\TGOTL\test assets\schoolStageCroppedWLights.png");
         }
 
         //it seems { get; set; } doesn't work with (abstract) object types, only primitives...

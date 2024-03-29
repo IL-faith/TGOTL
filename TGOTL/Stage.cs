@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ namespace TGOTL
         Car[] cars;
         int initialScore, currentPlayerScore, bestPlayerScore, speedLimit;
         bool unlocked;
+        Image i;
 
         public Stage(string stageName, TrafficLight[] tl, bool unlockedAlready = false) 
         {
@@ -33,5 +35,7 @@ namespace TGOTL
         public int CurrentPlayerScore { get; set; }
         public int BestPlayerScore { get; set; }
         public int SpeedLimit { get; set; }
+
+        public Image GetImage { get { return i;  } set { i = value; } }
     }
 }
