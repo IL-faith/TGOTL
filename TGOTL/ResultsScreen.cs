@@ -52,7 +52,7 @@ namespace TGOTL
             lblPlayerScore.Text = lblPlayerScore.Text.Replace("#", playerScore+"");
             lblStageScore.Text = lblStageScore.Text.Replace("#", stageScore+"");
 
-            if (playerScore < stageScore)
+            if (Math.Abs(playerScore - stageScore) <= 1500 )
             {
                 lblFailed.Visible = false;
                 if (game.CurrentStage != game.Stages.Length - 1)
@@ -166,9 +166,30 @@ namespace TGOTL
             if (game.PlaystyleIsMouse)
             {
                 game.CurrentStage += 1;
-                NonPrepScreen nextStage = new NonPrepScreen(this.Location, game);
-                nextStage.Show();
-                this.Close();
+                if (game.CurrentStage == 1)
+                {
+                    Stage2Prep s2 = new Stage2Prep(this.Location, game);
+                    s2.Show();
+                    this.Close();
+                }
+                else if (game.CurrentStage == 2)
+                {
+                    Stage3Prep s3 = new Stage3Prep(this.Location, game);
+                    s3.Show();
+                    this.Close();
+                }
+                else if (game.CurrentStage == 3)
+                {
+                    Stage4Prep s4 = new Stage4Prep(this.Location, game);
+                    s4.Show();
+                    this.Close();
+                }
+                else if (game.CurrentStage == 4)
+                {
+                    Stage5Prep s5 = new Stage5Prep(this.Location, game);
+                    s5.Show();
+                    this.Close();
+                }
             }
         }
 
@@ -176,9 +197,36 @@ namespace TGOTL
         {
             if (game.PlaystyleIsMouse)
             {
-                NonPrepScreen retryStage = new NonPrepScreen(this.Location, game);
-                retryStage.Show();
-                this.Close();
+                if (game.CurrentStage == 0)
+                {
+                    Stage1Prep s1 = new Stage1Prep(this.Location, game);
+                    s1.Show();
+                    this.Close();
+                }
+                else if (game.CurrentStage == 1)
+                {
+                    Stage2Prep s2 = new Stage2Prep(this.Location, game);
+                    s2.Show();
+                    this.Close();
+                }
+                else if (game.CurrentStage == 2)
+                {
+                    Stage3Prep s3 = new Stage3Prep(this.Location, game);
+                    s3.Show();
+                    this.Close();
+                }
+                else if (game.CurrentStage == 3)
+                {
+                    Stage4Prep s4 = new Stage4Prep(this.Location, game);
+                    s4.Show();
+                    this.Close();
+                }
+                else if (game.CurrentStage == 4)
+                {
+                    Stage5Prep s5 = new Stage5Prep(this.Location, game);
+                    s5.Show();
+                    this.Close();
+                }
             }
         }
     }

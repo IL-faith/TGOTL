@@ -1,6 +1,6 @@
 ﻿namespace TGOTL
 {
-    partial class Stage1Prep
+    partial class Stage3Prep
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Stage1Prep));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Stage3Prep));
             this.lblBackBtn = new System.Windows.Forms.Label();
             this.pbPauseBtn = new System.Windows.Forms.PictureBox();
             this.lblFinishPrepBtn = new System.Windows.Forms.Label();
@@ -41,18 +41,6 @@
             this.pbTrafficLightH2 = new System.Windows.Forms.PictureBox();
             this.pbTrafficLightV1 = new System.Windows.Forms.PictureBox();
             this.pbTrafficLightV2 = new System.Windows.Forms.PictureBox();
-            this.flpTimerTrafficLightMenu = new System.Windows.Forms.FlowLayoutPanel();
-            this.pbTrafficLight = new System.Windows.Forms.PictureBox();
-            this.flpSettings = new System.Windows.Forms.FlowLayoutPanel();
-            this.flpSetting1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.txtLightTime1 = new System.Windows.Forms.TextBox();
-            this.cmbTimeUnit1 = new System.Windows.Forms.ComboBox();
-            this.flpSetting2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.txtLightTime2 = new System.Windows.Forms.TextBox();
-            this.cmbTimeUnit2 = new System.Windows.Forms.ComboBox();
-            this.flpSetting3 = new System.Windows.Forms.FlowLayoutPanel();
-            this.txtLightTime3 = new System.Windows.Forms.TextBox();
-            this.cmbTimeUnit3 = new System.Windows.Forms.ComboBox();
             this.timeStageTimer = new System.Windows.Forms.Timer(this.components);
             this.pbH1Car1 = new System.Windows.Forms.PictureBox();
             this.pbH2Car1 = new System.Windows.Forms.PictureBox();
@@ -64,24 +52,40 @@
             this.timeRedLightTimerV = new System.Windows.Forms.Timer(this.components);
             this.timeYellowLightTimerV = new System.Windows.Forms.Timer(this.components);
             this.timeGreenLightTimerV = new System.Windows.Forms.Timer(this.components);
-            this.lblIntersectionArea = new System.Windows.Forms.Label();
             this.lblStageScore = new System.Windows.Forms.Label();
             this.timeStageTimer2 = new System.Windows.Forms.Timer(this.components);
+            this.flpSettings = new System.Windows.Forms.FlowLayoutPanel();
+            this.flpSetting3 = new System.Windows.Forms.FlowLayoutPanel();
+            this.cmbTimeUnit3 = new System.Windows.Forms.ComboBox();
+            this.txtLightTime3 = new System.Windows.Forms.TextBox();
+            this.flpSetting2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.cmbTimeUnit2 = new System.Windows.Forms.ComboBox();
+            this.txtLightTime2 = new System.Windows.Forms.TextBox();
+            this.flpSetting1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.cmbTimeUnit1 = new System.Windows.Forms.ComboBox();
+            this.txtLightTime1 = new System.Windows.Forms.TextBox();
+            this.pbTrafficLight = new System.Windows.Forms.PictureBox();
+            this.flpTimerTrafficLightMenu = new System.Windows.Forms.FlowLayoutPanel();
+            this.lblIntersectionArea = new System.Windows.Forms.Label();
+            this.lblUpperRightIntersection = new System.Windows.Forms.Label();
+            this.lblLowerRightIntersection = new System.Windows.Forms.Label();
+            this.lblUpperLeftIntersection = new System.Windows.Forms.Label();
+            this.lblLowerLeftIntersection = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbPauseBtn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbTrafficLightH1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbTrafficLightH2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbTrafficLightV1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbTrafficLightV2)).BeginInit();
-            this.flpTimerTrafficLightMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbTrafficLight)).BeginInit();
-            this.flpSettings.SuspendLayout();
-            this.flpSetting1.SuspendLayout();
-            this.flpSetting2.SuspendLayout();
-            this.flpSetting3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbH1Car1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbH2Car1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbV2Car1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbV1Car1)).BeginInit();
+            this.flpSettings.SuspendLayout();
+            this.flpSetting3.SuspendLayout();
+            this.flpSetting2.SuspendLayout();
+            this.flpSetting1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbTrafficLight)).BeginInit();
+            this.flpTimerTrafficLightMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblBackBtn
@@ -174,7 +178,7 @@
             // pbTrafficLightH1
             // 
             this.pbTrafficLightH1.BackColor = System.Drawing.Color.Transparent;
-            this.pbTrafficLightH1.Image = ((System.Drawing.Image)(resources.GetObject("pbTrafficLightH1.Image")));
+            this.pbTrafficLightH1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pbTrafficLightH1.BackgroundImage")));
             this.pbTrafficLightH1.Location = new System.Drawing.Point(324, 227);
             this.pbTrafficLightH1.Name = "pbTrafficLightH1";
             this.pbTrafficLightH1.Size = new System.Drawing.Size(90, 164);
@@ -185,7 +189,7 @@
             // pbTrafficLightH2
             // 
             this.pbTrafficLightH2.BackColor = System.Drawing.Color.Transparent;
-            this.pbTrafficLightH2.Image = ((System.Drawing.Image)(resources.GetObject("pbTrafficLightH2.Image")));
+            this.pbTrafficLightH2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pbTrafficLightH2.BackgroundImage")));
             this.pbTrafficLightH2.Location = new System.Drawing.Point(762, 425);
             this.pbTrafficLightH2.Name = "pbTrafficLightH2";
             this.pbTrafficLightH2.Size = new System.Drawing.Size(90, 164);
@@ -196,7 +200,7 @@
             // pbTrafficLightV1
             // 
             this.pbTrafficLightV1.BackColor = System.Drawing.Color.Transparent;
-            this.pbTrafficLightV1.Image = ((System.Drawing.Image)(resources.GetObject("pbTrafficLightV1.Image")));
+            this.pbTrafficLightV1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pbTrafficLightV1.BackgroundImage")));
             this.pbTrafficLightV1.Location = new System.Drawing.Point(602, 146);
             this.pbTrafficLightV1.Name = "pbTrafficLightV1";
             this.pbTrafficLightV1.Size = new System.Drawing.Size(164, 90);
@@ -207,141 +211,13 @@
             // pbTrafficLightV2
             // 
             this.pbTrafficLightV2.BackColor = System.Drawing.Color.Transparent;
-            this.pbTrafficLightV2.Image = ((System.Drawing.Image)(resources.GetObject("pbTrafficLightV2.Image")));
+            this.pbTrafficLightV2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pbTrafficLightV2.BackgroundImage")));
             this.pbTrafficLightV2.Location = new System.Drawing.Point(405, 584);
             this.pbTrafficLightV2.Name = "pbTrafficLightV2";
             this.pbTrafficLightV2.Size = new System.Drawing.Size(164, 90);
             this.pbTrafficLightV2.TabIndex = 30;
             this.pbTrafficLightV2.TabStop = false;
             this.pbTrafficLightV2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ShowTrafficLightSettingsClick);
-            // 
-            // flpTimerTrafficLightMenu
-            // 
-            this.flpTimerTrafficLightMenu.Controls.Add(this.pbTrafficLight);
-            this.flpTimerTrafficLightMenu.Controls.Add(this.flpSettings);
-            this.flpTimerTrafficLightMenu.Location = new System.Drawing.Point(405, 242);
-            this.flpTimerTrafficLightMenu.Name = "flpTimerTrafficLightMenu";
-            this.flpTimerTrafficLightMenu.Size = new System.Drawing.Size(365, 366);
-            this.flpTimerTrafficLightMenu.TabIndex = 31;
-            // 
-            // pbTrafficLight
-            // 
-            this.pbTrafficLight.Image = ((System.Drawing.Image)(resources.GetObject("pbTrafficLight.Image")));
-            this.pbTrafficLight.Location = new System.Drawing.Point(3, 3);
-            this.pbTrafficLight.Name = "pbTrafficLight";
-            this.pbTrafficLight.Size = new System.Drawing.Size(178, 363);
-            this.pbTrafficLight.TabIndex = 0;
-            this.pbTrafficLight.TabStop = false;
-            // 
-            // flpSettings
-            // 
-            this.flpSettings.Controls.Add(this.flpSetting1);
-            this.flpSettings.Controls.Add(this.flpSetting2);
-            this.flpSettings.Controls.Add(this.flpSetting3);
-            this.flpSettings.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flpSettings.Location = new System.Drawing.Point(187, 3);
-            this.flpSettings.Name = "flpSettings";
-            this.flpSettings.Size = new System.Drawing.Size(175, 363);
-            this.flpSettings.TabIndex = 1;
-            // 
-            // flpSetting1
-            // 
-            this.flpSetting1.Controls.Add(this.txtLightTime1);
-            this.flpSetting1.Controls.Add(this.cmbTimeUnit1);
-            this.flpSetting1.Location = new System.Drawing.Point(3, 3);
-            this.flpSetting1.Name = "flpSetting1";
-            this.flpSetting1.Size = new System.Drawing.Size(168, 110);
-            this.flpSetting1.TabIndex = 0;
-            // 
-            // txtLightTime1
-            // 
-            this.txtLightTime1.Location = new System.Drawing.Point(3, 50);
-            this.txtLightTime1.Margin = new System.Windows.Forms.Padding(3, 50, 3, 3);
-            this.txtLightTime1.Name = "txtLightTime1";
-            this.txtLightTime1.Size = new System.Drawing.Size(67, 26);
-            this.txtLightTime1.TabIndex = 0;
-            this.txtLightTime1.Text = "###";
-            this.txtLightTime1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtLightTime1.TextChanged += new System.EventHandler(this.TimeInputted);
-            // 
-            // cmbTimeUnit1
-            // 
-            this.cmbTimeUnit1.FormattingEnabled = true;
-            this.cmbTimeUnit1.Items.AddRange(new object[] {
-            "sec",
-            "min"});
-            this.cmbTimeUnit1.Location = new System.Drawing.Point(76, 50);
-            this.cmbTimeUnit1.Margin = new System.Windows.Forms.Padding(3, 50, 3, 3);
-            this.cmbTimeUnit1.Name = "cmbTimeUnit1";
-            this.cmbTimeUnit1.Size = new System.Drawing.Size(87, 28);
-            this.cmbTimeUnit1.TabIndex = 1;
-            this.cmbTimeUnit1.SelectedIndexChanged += new System.EventHandler(this.TimeUnitChanged);
-            // 
-            // flpSetting2
-            // 
-            this.flpSetting2.Controls.Add(this.txtLightTime2);
-            this.flpSetting2.Controls.Add(this.cmbTimeUnit2);
-            this.flpSetting2.Location = new System.Drawing.Point(3, 119);
-            this.flpSetting2.Name = "flpSetting2";
-            this.flpSetting2.Size = new System.Drawing.Size(168, 110);
-            this.flpSetting2.TabIndex = 2;
-            // 
-            // txtLightTime2
-            // 
-            this.txtLightTime2.Location = new System.Drawing.Point(3, 50);
-            this.txtLightTime2.Margin = new System.Windows.Forms.Padding(3, 50, 3, 3);
-            this.txtLightTime2.Name = "txtLightTime2";
-            this.txtLightTime2.Size = new System.Drawing.Size(67, 26);
-            this.txtLightTime2.TabIndex = 0;
-            this.txtLightTime2.Text = "###";
-            this.txtLightTime2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtLightTime2.TextChanged += new System.EventHandler(this.TimeInputted);
-            // 
-            // cmbTimeUnit2
-            // 
-            this.cmbTimeUnit2.FormattingEnabled = true;
-            this.cmbTimeUnit2.Items.AddRange(new object[] {
-            "sec",
-            "min"});
-            this.cmbTimeUnit2.Location = new System.Drawing.Point(76, 50);
-            this.cmbTimeUnit2.Margin = new System.Windows.Forms.Padding(3, 50, 3, 3);
-            this.cmbTimeUnit2.Name = "cmbTimeUnit2";
-            this.cmbTimeUnit2.Size = new System.Drawing.Size(87, 28);
-            this.cmbTimeUnit2.TabIndex = 1;
-            this.cmbTimeUnit2.SelectedIndexChanged += new System.EventHandler(this.TimeUnitChanged);
-            // 
-            // flpSetting3
-            // 
-            this.flpSetting3.Controls.Add(this.txtLightTime3);
-            this.flpSetting3.Controls.Add(this.cmbTimeUnit3);
-            this.flpSetting3.Location = new System.Drawing.Point(3, 235);
-            this.flpSetting3.Name = "flpSetting3";
-            this.flpSetting3.Size = new System.Drawing.Size(168, 110);
-            this.flpSetting3.TabIndex = 2;
-            // 
-            // txtLightTime3
-            // 
-            this.txtLightTime3.Location = new System.Drawing.Point(3, 50);
-            this.txtLightTime3.Margin = new System.Windows.Forms.Padding(3, 50, 3, 3);
-            this.txtLightTime3.Name = "txtLightTime3";
-            this.txtLightTime3.Size = new System.Drawing.Size(67, 26);
-            this.txtLightTime3.TabIndex = 0;
-            this.txtLightTime3.Text = "###";
-            this.txtLightTime3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtLightTime3.TextChanged += new System.EventHandler(this.TimeInputted);
-            // 
-            // cmbTimeUnit3
-            // 
-            this.cmbTimeUnit3.FormattingEnabled = true;
-            this.cmbTimeUnit3.Items.AddRange(new object[] {
-            "sec",
-            "min"});
-            this.cmbTimeUnit3.Location = new System.Drawing.Point(76, 50);
-            this.cmbTimeUnit3.Margin = new System.Windows.Forms.Padding(3, 50, 3, 3);
-            this.cmbTimeUnit3.Name = "cmbTimeUnit3";
-            this.cmbTimeUnit3.Size = new System.Drawing.Size(87, 28);
-            this.cmbTimeUnit3.TabIndex = 1;
-            this.cmbTimeUnit3.SelectedIndexChanged += new System.EventHandler(this.TimeUnitChanged);
             // 
             // timeStageTimer
             // 
@@ -410,14 +286,6 @@
             this.timeGreenLightTimerV.Enabled = true;
             this.timeGreenLightTimerV.Tick += new System.EventHandler(this.LightIsGreenV);
             // 
-            // lblIntersectionArea
-            // 
-            this.lblIntersectionArea.Location = new System.Drawing.Point(439, 260);
-            this.lblIntersectionArea.Name = "lblIntersectionArea";
-            this.lblIntersectionArea.Size = new System.Drawing.Size(295, 293);
-            this.lblIntersectionArea.TabIndex = 36;
-            this.lblIntersectionArea.Visible = false;
-            // 
             // lblStageScore
             // 
             this.lblStageScore.BackColor = System.Drawing.Color.Transparent;
@@ -433,12 +301,188 @@
             this.timeStageTimer2.Interval = 150;
             this.timeStageTimer2.Tick += new System.EventHandler(this.TrafficGeneration2);
             // 
-            // Stage1Prep
+            // flpSettings
+            // 
+            this.flpSettings.Controls.Add(this.flpSetting1);
+            this.flpSettings.Controls.Add(this.flpSetting2);
+            this.flpSettings.Controls.Add(this.flpSetting3);
+            this.flpSettings.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flpSettings.Location = new System.Drawing.Point(187, 3);
+            this.flpSettings.Name = "flpSettings";
+            this.flpSettings.Size = new System.Drawing.Size(175, 363);
+            this.flpSettings.TabIndex = 1;
+            // 
+            // flpSetting3
+            // 
+            this.flpSetting3.Controls.Add(this.txtLightTime3);
+            this.flpSetting3.Controls.Add(this.cmbTimeUnit3);
+            this.flpSetting3.Location = new System.Drawing.Point(3, 235);
+            this.flpSetting3.Name = "flpSetting3";
+            this.flpSetting3.Size = new System.Drawing.Size(168, 110);
+            this.flpSetting3.TabIndex = 2;
+            // 
+            // cmbTimeUnit3
+            // 
+            this.cmbTimeUnit3.FormattingEnabled = true;
+            this.cmbTimeUnit3.Items.AddRange(new object[] {
+            "sec",
+            "min"});
+            this.cmbTimeUnit3.Location = new System.Drawing.Point(76, 50);
+            this.cmbTimeUnit3.Margin = new System.Windows.Forms.Padding(3, 50, 3, 3);
+            this.cmbTimeUnit3.Name = "cmbTimeUnit3";
+            this.cmbTimeUnit3.Size = new System.Drawing.Size(87, 28);
+            this.cmbTimeUnit3.TabIndex = 1;
+            this.cmbTimeUnit3.SelectedIndexChanged += new System.EventHandler(this.TimeUnitChanged);
+            // 
+            // txtLightTime3
+            // 
+            this.txtLightTime3.Location = new System.Drawing.Point(3, 50);
+            this.txtLightTime3.Margin = new System.Windows.Forms.Padding(3, 50, 3, 3);
+            this.txtLightTime3.Name = "txtLightTime3";
+            this.txtLightTime3.Size = new System.Drawing.Size(67, 26);
+            this.txtLightTime3.TabIndex = 0;
+            this.txtLightTime3.Text = "###";
+            this.txtLightTime3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtLightTime3.TextChanged += new System.EventHandler(this.TimeInputted);
+            // 
+            // flpSetting2
+            // 
+            this.flpSetting2.Controls.Add(this.txtLightTime2);
+            this.flpSetting2.Controls.Add(this.cmbTimeUnit2);
+            this.flpSetting2.Location = new System.Drawing.Point(3, 119);
+            this.flpSetting2.Name = "flpSetting2";
+            this.flpSetting2.Size = new System.Drawing.Size(168, 110);
+            this.flpSetting2.TabIndex = 2;
+            // 
+            // cmbTimeUnit2
+            // 
+            this.cmbTimeUnit2.FormattingEnabled = true;
+            this.cmbTimeUnit2.Items.AddRange(new object[] {
+            "sec",
+            "min"});
+            this.cmbTimeUnit2.Location = new System.Drawing.Point(76, 50);
+            this.cmbTimeUnit2.Margin = new System.Windows.Forms.Padding(3, 50, 3, 3);
+            this.cmbTimeUnit2.Name = "cmbTimeUnit2";
+            this.cmbTimeUnit2.Size = new System.Drawing.Size(87, 28);
+            this.cmbTimeUnit2.TabIndex = 1;
+            this.cmbTimeUnit2.SelectedIndexChanged += new System.EventHandler(this.TimeUnitChanged);
+            // 
+            // txtLightTime2
+            // 
+            this.txtLightTime2.Location = new System.Drawing.Point(3, 50);
+            this.txtLightTime2.Margin = new System.Windows.Forms.Padding(3, 50, 3, 3);
+            this.txtLightTime2.Name = "txtLightTime2";
+            this.txtLightTime2.Size = new System.Drawing.Size(67, 26);
+            this.txtLightTime2.TabIndex = 0;
+            this.txtLightTime2.Text = "###";
+            this.txtLightTime2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtLightTime2.TextChanged += new System.EventHandler(this.TimeInputted);
+            // 
+            // flpSetting1
+            // 
+            this.flpSetting1.Controls.Add(this.txtLightTime1);
+            this.flpSetting1.Controls.Add(this.cmbTimeUnit1);
+            this.flpSetting1.Location = new System.Drawing.Point(3, 3);
+            this.flpSetting1.Name = "flpSetting1";
+            this.flpSetting1.Size = new System.Drawing.Size(168, 110);
+            this.flpSetting1.TabIndex = 0;
+            // 
+            // cmbTimeUnit1
+            // 
+            this.cmbTimeUnit1.FormattingEnabled = true;
+            this.cmbTimeUnit1.Items.AddRange(new object[] {
+            "sec",
+            "min"});
+            this.cmbTimeUnit1.Location = new System.Drawing.Point(76, 50);
+            this.cmbTimeUnit1.Margin = new System.Windows.Forms.Padding(3, 50, 3, 3);
+            this.cmbTimeUnit1.Name = "cmbTimeUnit1";
+            this.cmbTimeUnit1.Size = new System.Drawing.Size(87, 28);
+            this.cmbTimeUnit1.TabIndex = 1;
+            this.cmbTimeUnit1.SelectedIndexChanged += new System.EventHandler(this.TimeUnitChanged);
+            // 
+            // txtLightTime1
+            // 
+            this.txtLightTime1.Location = new System.Drawing.Point(3, 50);
+            this.txtLightTime1.Margin = new System.Windows.Forms.Padding(3, 50, 3, 3);
+            this.txtLightTime1.Name = "txtLightTime1";
+            this.txtLightTime1.Size = new System.Drawing.Size(67, 26);
+            this.txtLightTime1.TabIndex = 0;
+            this.txtLightTime1.Text = "###";
+            this.txtLightTime1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtLightTime1.TextChanged += new System.EventHandler(this.TimeInputted);
+            // 
+            // pbTrafficLight
+            // 
+            this.pbTrafficLight.Image = ((System.Drawing.Image)(resources.GetObject("pbTrafficLight.Image")));
+            this.pbTrafficLight.Location = new System.Drawing.Point(3, 3);
+            this.pbTrafficLight.Name = "pbTrafficLight";
+            this.pbTrafficLight.Size = new System.Drawing.Size(178, 363);
+            this.pbTrafficLight.TabIndex = 0;
+            this.pbTrafficLight.TabStop = false;
+            // 
+            // flpTimerTrafficLightMenu
+            // 
+            this.flpTimerTrafficLightMenu.Controls.Add(this.pbTrafficLight);
+            this.flpTimerTrafficLightMenu.Controls.Add(this.flpSettings);
+            this.flpTimerTrafficLightMenu.Location = new System.Drawing.Point(420, 242);
+            this.flpTimerTrafficLightMenu.Name = "flpTimerTrafficLightMenu";
+            this.flpTimerTrafficLightMenu.Size = new System.Drawing.Size(365, 366);
+            this.flpTimerTrafficLightMenu.TabIndex = 31;
+            // 
+            // lblIntersectionArea
+            // 
+            this.lblIntersectionArea.Location = new System.Drawing.Point(439, 260);
+            this.lblIntersectionArea.Name = "lblIntersectionArea";
+            this.lblIntersectionArea.Size = new System.Drawing.Size(295, 293);
+            this.lblIntersectionArea.TabIndex = 36;
+            this.lblIntersectionArea.Visible = false;
+            // 
+            // lblUpperRightIntersection
+            // 
+            this.lblUpperRightIntersection.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lblUpperRightIntersection.Location = new System.Drawing.Point(602, 307);
+            this.lblUpperRightIntersection.Name = "lblUpperRightIntersection";
+            this.lblUpperRightIntersection.Size = new System.Drawing.Size(88, 89);
+            this.lblUpperRightIntersection.TabIndex = 44;
+            this.lblUpperRightIntersection.Visible = false;
+            // 
+            // lblLowerRightIntersection
+            // 
+            this.lblLowerRightIntersection.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.lblLowerRightIntersection.Location = new System.Drawing.Point(602, 413);
+            this.lblLowerRightIntersection.Name = "lblLowerRightIntersection";
+            this.lblLowerRightIntersection.Size = new System.Drawing.Size(88, 91);
+            this.lblLowerRightIntersection.TabIndex = 45;
+            this.lblLowerRightIntersection.Visible = false;
+            // 
+            // lblUpperLeftIntersection
+            // 
+            this.lblUpperLeftIntersection.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblUpperLeftIntersection.Location = new System.Drawing.Point(489, 307);
+            this.lblUpperLeftIntersection.Name = "lblUpperLeftIntersection";
+            this.lblUpperLeftIntersection.Size = new System.Drawing.Size(96, 89);
+            this.lblUpperLeftIntersection.TabIndex = 46;
+            this.lblUpperLeftIntersection.Visible = false;
+            // 
+            // lblLowerLeftIntersection
+            // 
+            this.lblLowerLeftIntersection.BackColor = System.Drawing.SystemColors.Highlight;
+            this.lblLowerLeftIntersection.Location = new System.Drawing.Point(489, 413);
+            this.lblLowerLeftIntersection.Name = "lblLowerLeftIntersection";
+            this.lblLowerLeftIntersection.Size = new System.Drawing.Size(96, 92);
+            this.lblLowerLeftIntersection.TabIndex = 47;
+            this.lblLowerLeftIntersection.Visible = false;
+            // 
+            // Stage3Prep
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1160, 756);
+            this.Controls.Add(this.lblLowerLeftIntersection);
+            this.Controls.Add(this.lblUpperLeftIntersection);
+            this.Controls.Add(this.lblLowerRightIntersection);
+            this.Controls.Add(this.lblUpperRightIntersection);
             this.Controls.Add(this.lblStageScore);
             this.Controls.Add(this.lblIntersectionArea);
             this.Controls.Add(this.pbV1Car1);
@@ -458,7 +502,7 @@
             this.Controls.Add(this.lblSelect1PauseBtn);
             this.Controls.Add(this.lblSelect3FinishPrepBtn);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "Stage1Prep";
+            this.Name = "Stage3Prep";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "The Game of Traffic Lights";
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.HideTrafficLightSettingsClick);
@@ -467,19 +511,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbTrafficLightH2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbTrafficLightV1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbTrafficLightV2)).EndInit();
-            this.flpTimerTrafficLightMenu.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbTrafficLight)).EndInit();
-            this.flpSettings.ResumeLayout(false);
-            this.flpSetting1.ResumeLayout(false);
-            this.flpSetting1.PerformLayout();
-            this.flpSetting2.ResumeLayout(false);
-            this.flpSetting2.PerformLayout();
-            this.flpSetting3.ResumeLayout(false);
-            this.flpSetting3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbH1Car1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbH2Car1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbV2Car1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbV1Car1)).EndInit();
+            this.flpSettings.ResumeLayout(false);
+            this.flpSetting3.ResumeLayout(false);
+            this.flpSetting3.PerformLayout();
+            this.flpSetting2.ResumeLayout(false);
+            this.flpSetting2.PerformLayout();
+            this.flpSetting1.ResumeLayout(false);
+            this.flpSetting1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbTrafficLight)).EndInit();
+            this.flpTimerTrafficLightMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -498,18 +542,6 @@
         private System.Windows.Forms.PictureBox pbTrafficLightH2;
         private System.Windows.Forms.PictureBox pbTrafficLightV1;
         private System.Windows.Forms.PictureBox pbTrafficLightV2;
-        private System.Windows.Forms.FlowLayoutPanel flpTimerTrafficLightMenu;
-        private System.Windows.Forms.PictureBox pbTrafficLight;
-        private System.Windows.Forms.FlowLayoutPanel flpSettings;
-        private System.Windows.Forms.FlowLayoutPanel flpSetting1;
-        private System.Windows.Forms.TextBox txtLightTime1;
-        private System.Windows.Forms.ComboBox cmbTimeUnit1;
-        private System.Windows.Forms.FlowLayoutPanel flpSetting2;
-        private System.Windows.Forms.TextBox txtLightTime2;
-        private System.Windows.Forms.ComboBox cmbTimeUnit2;
-        private System.Windows.Forms.FlowLayoutPanel flpSetting3;
-        private System.Windows.Forms.TextBox txtLightTime3;
-        private System.Windows.Forms.ComboBox cmbTimeUnit3;
         private System.Windows.Forms.Timer timeStageTimer;
         private System.Windows.Forms.PictureBox pbH1Car1;
         private System.Windows.Forms.PictureBox pbH2Car1;
@@ -521,9 +553,25 @@
         private System.Windows.Forms.Timer timeRedLightTimerV;
         private System.Windows.Forms.Timer timeYellowLightTimerV;
         private System.Windows.Forms.Timer timeGreenLightTimerV;
-        private System.Windows.Forms.Label lblIntersectionArea;
         private System.Windows.Forms.Label lblStageScore;
         private System.Windows.Forms.Timer timeStageTimer2;
+        private System.Windows.Forms.FlowLayoutPanel flpSettings;
+        private System.Windows.Forms.FlowLayoutPanel flpSetting1;
+        private System.Windows.Forms.TextBox txtLightTime1;
+        private System.Windows.Forms.ComboBox cmbTimeUnit1;
+        private System.Windows.Forms.FlowLayoutPanel flpSetting2;
+        private System.Windows.Forms.TextBox txtLightTime2;
+        private System.Windows.Forms.ComboBox cmbTimeUnit2;
+        private System.Windows.Forms.FlowLayoutPanel flpSetting3;
+        private System.Windows.Forms.TextBox txtLightTime3;
+        private System.Windows.Forms.ComboBox cmbTimeUnit3;
+        private System.Windows.Forms.PictureBox pbTrafficLight;
+        private System.Windows.Forms.FlowLayoutPanel flpTimerTrafficLightMenu;
+        private System.Windows.Forms.Label lblIntersectionArea;
+        private System.Windows.Forms.Label lblUpperRightIntersection;
+        private System.Windows.Forms.Label lblLowerRightIntersection;
+        private System.Windows.Forms.Label lblUpperLeftIntersection;
+        private System.Windows.Forms.Label lblLowerLeftIntersection;
     }
 }
 

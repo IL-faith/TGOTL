@@ -1,6 +1,6 @@
 ﻿namespace TGOTL
 {
-    partial class Stage1Prep
+    partial class Stage5Prep
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Stage1Prep));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Stage5Prep));
             this.lblBackBtn = new System.Windows.Forms.Label();
             this.pbPauseBtn = new System.Windows.Forms.PictureBox();
             this.lblFinishPrepBtn = new System.Windows.Forms.Label();
@@ -174,7 +174,7 @@
             // pbTrafficLightH1
             // 
             this.pbTrafficLightH1.BackColor = System.Drawing.Color.Transparent;
-            this.pbTrafficLightH1.Image = ((System.Drawing.Image)(resources.GetObject("pbTrafficLightH1.Image")));
+            this.pbTrafficLightH1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pbTrafficLightH1.BackgroundImage")));
             this.pbTrafficLightH1.Location = new System.Drawing.Point(324, 227);
             this.pbTrafficLightH1.Name = "pbTrafficLightH1";
             this.pbTrafficLightH1.Size = new System.Drawing.Size(90, 164);
@@ -185,7 +185,7 @@
             // pbTrafficLightH2
             // 
             this.pbTrafficLightH2.BackColor = System.Drawing.Color.Transparent;
-            this.pbTrafficLightH2.Image = ((System.Drawing.Image)(resources.GetObject("pbTrafficLightH2.Image")));
+            this.pbTrafficLightH2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pbTrafficLightH2.BackgroundImage")));
             this.pbTrafficLightH2.Location = new System.Drawing.Point(762, 425);
             this.pbTrafficLightH2.Name = "pbTrafficLightH2";
             this.pbTrafficLightH2.Size = new System.Drawing.Size(90, 164);
@@ -196,7 +196,7 @@
             // pbTrafficLightV1
             // 
             this.pbTrafficLightV1.BackColor = System.Drawing.Color.Transparent;
-            this.pbTrafficLightV1.Image = ((System.Drawing.Image)(resources.GetObject("pbTrafficLightV1.Image")));
+            this.pbTrafficLightV1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pbTrafficLightV1.BackgroundImage")));
             this.pbTrafficLightV1.Location = new System.Drawing.Point(602, 146);
             this.pbTrafficLightV1.Name = "pbTrafficLightV1";
             this.pbTrafficLightV1.Size = new System.Drawing.Size(164, 90);
@@ -207,7 +207,7 @@
             // pbTrafficLightV2
             // 
             this.pbTrafficLightV2.BackColor = System.Drawing.Color.Transparent;
-            this.pbTrafficLightV2.Image = ((System.Drawing.Image)(resources.GetObject("pbTrafficLightV2.Image")));
+            this.pbTrafficLightV2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pbTrafficLightV2.BackgroundImage")));
             this.pbTrafficLightV2.Location = new System.Drawing.Point(405, 584);
             this.pbTrafficLightV2.Name = "pbTrafficLightV2";
             this.pbTrafficLightV2.Size = new System.Drawing.Size(164, 90);
@@ -433,7 +433,7 @@
             this.timeStageTimer2.Interval = 150;
             this.timeStageTimer2.Tick += new System.EventHandler(this.TrafficGeneration2);
             // 
-            // Stage1Prep
+            // Stage5Prep
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
@@ -458,7 +458,7 @@
             this.Controls.Add(this.lblSelect1PauseBtn);
             this.Controls.Add(this.lblSelect3FinishPrepBtn);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "Stage1Prep";
+            this.Name = "Stage5Prep";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "The Game of Traffic Lights";
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.HideTrafficLightSettingsClick);

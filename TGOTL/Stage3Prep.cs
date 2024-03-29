@@ -15,7 +15,7 @@ using System.Windows.Forms;
 
 namespace TGOTL
 {
-    public partial class Stage1Prep : Form
+    public partial class Stage3Prep : Form
     {
         struct CCar
         {
@@ -23,6 +23,8 @@ namespace TGOTL
             // 4 speeds, speed limit -10, -5, +0 (equal to), +5
             internal int speed, speedDirection, timeStopped;
             internal bool inUse, wasUsed, speedAffectsX;
+            internal int turn;
+            internal bool turned;
         };
 
         struct TrafficLightSettings
@@ -56,7 +58,7 @@ namespace TGOTL
         Random rnd = new Random();
         int numCarsToMake, numCarsMade = 0, stageSpeedLimit;
 
-        public Stage1Prep(Point formPosition, Game g)
+        public Stage3Prep(Point formPosition, Game g)
         {
             InitializeComponent();
             
@@ -75,7 +77,7 @@ namespace TGOTL
             pbH2Car1.Visible = false;
 
             stageSpeedLimit = 70;
-            numCarsToMake = 5;//rnd.Next(100) + 60;
+            numCarsToMake = 10;//rnd.Next(100) + 60;
             GenerateCars();
             GroupCars();
 
@@ -294,26 +296,85 @@ namespace TGOTL
             //MOVING ONE CAR/LANE AT A TIME
             if (h1CarsIndex != h1CarsEndIndex)
             {
+                if (h1Cars[h1CarsIndex].turn == -1)
+                    h1Cars[h1CarsIndex].turn = rnd.Next(3);
+
                 //lblStageScore.Text = "";
                 if (h1Cars[h1CarsIndex].car.Visible)
                 {
                     if (signalColorH == TrafficLightColor.GREEN)
-                        h1Cars[h1CarsIndex].car.Left -= h1Cars[h1CarsIndex].speed;
+                    {
+                        if (h1Cars[h1CarsIndex].turn == 2) // go straight
+                            h1Cars[h1CarsIndex].car.Left -= h1Cars[h1CarsIndex].speed;
+                        else if (h1Cars[h1CarsIndex].turn == 0) // go left
+                        {
+                            if (h1Cars[h1CarsIndex].car.Size != pbV1Car1.Size && h1Cars[h1CarsIndex].car.Location.X < lblUpperLeftIntersection.Bounds.Right - 37)
+                            {
+                                h1Cars[h1CarsIndex].car.Size = pbV1Car1.Size;
+                                h1Cars[h1CarsIndex].turned = true;
+                            }
+                            if (h1Cars[h1CarsIndex].car.Size == pbV1Car1.Size)
+                                h1Cars[h1CarsIndex].car.Top += h1Cars[h1CarsIndex].speed;
+                            else
+                                h1Cars[h1CarsIndex].car.Left -= h1Cars[h1CarsIndex].speed;
+                        }
+                        else // go right
+                        {
+                            if (h1Cars[h1CarsIndex].car.Size != pbV1Car1.Size && h1Cars[h1CarsIndex].car.Location.X < lblUpperRightIntersection.Bounds.Right - 37)
+                            {
+                                h1Cars[h1CarsIndex].car.Size = pbV1Car1.Size;
+                                h1Cars[h1CarsIndex].turned = true;
+                            }
+                            if (h1Cars[h1CarsIndex].car.Size == pbV1Car1.Size)
+                                h1Cars[h1CarsIndex].car.Top -= h1Cars[h1CarsIndex].speed;
+                            else
+                                h1Cars[h1CarsIndex].car.Left -= h1Cars[h1CarsIndex].speed;
+                        }
+                    }
                     else /*if (signalColorH == TrafficLightColor.RED)*/
                     {
                         int currentSpeed = h1Cars[h1CarsIndex].speed;
                         int dummyX = h1Cars[h1CarsIndex].car.Location.X - currentSpeed/*, dummyY = h1Cars[h1CarsIndex].car.Location.Y*/;
-                        if (dummyX < lblIntersectionArea.Bounds.Right && dummyX > lblIntersectionArea.Bounds.Left)
+                        if (!h1Cars[h1CarsIndex].turned && dummyX < lblIntersectionArea.Bounds.Right && dummyX > lblIntersectionArea.Bounds.Left)
                         {
                             h1Cars[h1CarsIndex].car.Left = lblIntersectionArea.Bounds.Right;
                             h1Cars[h1CarsIndex].timeStopped += timeStageTimer.Interval;
                         }
                         else
-                            h1Cars[h1CarsIndex].car.Left -= h1Cars[h1CarsIndex].speed;
+                        {
+                            if (h1Cars[h1CarsIndex].turn == 2) // go straight
+                                h1Cars[h1CarsIndex].car.Left -= h1Cars[h1CarsIndex].speed;
+                            else if (h1Cars[h1CarsIndex].turn == 0) // go left
+                            {
+                                if (h1Cars[h1CarsIndex].car.Size != pbV1Car1.Size && h1Cars[h1CarsIndex].car.Location.X < lblUpperLeftIntersection.Bounds.Right - 37)
+                                {
+                                    h1Cars[h1CarsIndex].car.Size = pbV1Car1.Size;
+                                    h1Cars[h1CarsIndex].turned = true;
+                                }
+                                if (h1Cars[h1CarsIndex].car.Size == pbV1Car1.Size)
+                                    h1Cars[h1CarsIndex].car.Top += h1Cars[h1CarsIndex].speed;
+                                else
+                                    h1Cars[h1CarsIndex].car.Left -= h1Cars[h1CarsIndex].speed;
+                            }
+                            else // go right
+                            {
+                                if (h1Cars[h1CarsIndex].car.Size != pbV1Car1.Size && h1Cars[h1CarsIndex].car.Location.X < lblUpperRightIntersection.Bounds.Right - 37)
+                                {
+                                    h1Cars[h1CarsIndex].car.Size = pbV1Car1.Size;
+                                    h1Cars[h1CarsIndex].turned = true;
+                                }
+                                if (h1Cars[h1CarsIndex].car.Size == pbV1Car1.Size)
+                                    h1Cars[h1CarsIndex].car.Top -= h1Cars[h1CarsIndex].speed;
+                                else
+                                    h1Cars[h1CarsIndex].car.Left -= h1Cars[h1CarsIndex].speed;
+                            }
+                        }
                     }
 
                     //check that car is still visible on stage
-                    if (h1Cars[h1CarsIndex].car.Bounds.Right < this.Bounds.Left - 500)
+                    if ((h1Cars[h1CarsIndex].turn == 2 && h1Cars[h1CarsIndex].car.Bounds.Right < this.Bounds.Left - 500) || 
+                        (h1Cars[h1CarsIndex].turn == 0 && h1Cars[h1CarsIndex].car.Bounds.Top > this.Bounds.Bottom + 500) ||
+                        (h1Cars[h1CarsIndex].turn == 1 && h1Cars[h1CarsIndex].car.Bounds.Bottom < this.Bounds.Top - 500))
                     {
                         // car has left stage
 
@@ -322,6 +383,8 @@ namespace TGOTL
                         h1Cars[h1CarsIndex].inUse = false;
 
                         h1Cars[h1CarsIndex].car.Location = pbH1Car1.Location;
+                        h1Cars[h1CarsIndex].car.Size = pbH1Car1.Size;
+                        h1Cars[h1CarsIndex].turned = false;
                         //this.Controls.Remove(h1Cars[h1CarsIndex].car); //?
                         //if (h1CarsIndex < h1CarsEndIndex - 1)
                         h1CarsIndex++;
@@ -335,25 +398,88 @@ namespace TGOTL
 
             if (h2CarsIndex != h2CarsEndIndex)
             {
+                if (h2Cars[h2CarsIndex].turn == -1)
+                    h2Cars[h2CarsIndex].turn = rnd.Next(3);
+
                 if (h2Cars[h2CarsIndex].car.Visible)
                 {
                     if (signalColorH == TrafficLightColor.GREEN)
-                        h2Cars[h2CarsIndex].car.Left += h2Cars[h2CarsIndex].speed;
+                    {
+                        if (h2Cars[h2CarsIndex].turn == 2) //go straight
+                            h2Cars[h2CarsIndex].car.Left += h2Cars[h2CarsIndex].speed;
+                        else if (h2Cars[h2CarsIndex].turn == 0) // go right
+                        {
+                            if (h2Cars[h2CarsIndex].car.Size != pbV1Car1.Size && h2Cars[h2CarsIndex].car.Location.X > lblLowerLeftIntersection.Bounds.Left)
+                            {
+                                h2Cars[h2CarsIndex].car.Size = pbV1Car1.Size;
+                                h2Cars[h2CarsIndex].turned = true;
+                            }
+
+                            if (h2Cars[h2CarsIndex].car.Size == pbV1Car1.Size)
+                                h2Cars[h2CarsIndex].car.Top += h2Cars[h2CarsIndex].speed;
+                            else
+                                h2Cars[h2CarsIndex].car.Left += h2Cars[h2CarsIndex].speed;
+                        }
+                        else // go left
+                        {
+                            if (h2Cars[h2CarsIndex].car.Size != pbV1Car1.Size && h2Cars[h2CarsIndex].car.Location.X > lblLowerRightIntersection.Bounds.Left)
+                            {
+                                h2Cars[h2CarsIndex].car.Size = pbV1Car1.Size;
+                                h2Cars[h2CarsIndex].turned = true;
+                            }
+
+                            if (h2Cars[h2CarsIndex].car.Size == pbV1Car1.Size)
+                                h2Cars[h2CarsIndex].car.Top -= h2Cars[h2CarsIndex].speed;
+                            else
+                                h2Cars[h2CarsIndex].car.Left += h2Cars[h2CarsIndex].speed;
+                        }
+                    }
                     else /*if (signalColorH == TrafficLightColor.RED)*/
                     {
                         int currentSpeed = h2Cars[h2CarsIndex].speed;
                         int dummyX = h2Cars[h2CarsIndex].car.Location.X + currentSpeed/*, dummyY = h1Cars[h1CarsIndex].car.Location.Y*/;
-                        if (dummyX < lblIntersectionArea.Bounds.Right && dummyX > lblIntersectionArea.Bounds.Left - 100)
+                        if (!h2Cars[h2CarsIndex].turned && dummyX < lblIntersectionArea.Bounds.Right && dummyX > lblIntersectionArea.Bounds.Left - 100)
                         { 
                             h2Cars[h2CarsIndex].car.Left = lblIntersectionArea.Bounds.Left - 100;
                             h2Cars[h2CarsIndex].timeStopped += timeStageTimer.Interval;
                         }
                         else
-                            h2Cars[h2CarsIndex].car.Left += h2Cars[h2CarsIndex].speed;
+                        {
+                            if (h2Cars[h2CarsIndex].turn == 2) //go straight
+                                h2Cars[h2CarsIndex].car.Left += h2Cars[h2CarsIndex].speed;
+                            else if (h2Cars[h2CarsIndex].turn == 0) // go right
+                            {
+                                if (h2Cars[h2CarsIndex].car.Size != pbV1Car1.Size && h2Cars[h2CarsIndex].car.Location.X > lblLowerLeftIntersection.Bounds.Left)
+                                {
+                                    h2Cars[h2CarsIndex].car.Size = pbV1Car1.Size;
+                                    h2Cars[h2CarsIndex].turned = true;
+                                }
+
+                                if (h2Cars[h2CarsIndex].car.Size == pbV1Car1.Size)
+                                    h2Cars[h2CarsIndex].car.Top += h2Cars[h2CarsIndex].speed;
+                                else
+                                    h2Cars[h2CarsIndex].car.Left += h2Cars[h2CarsIndex].speed;
+                            }
+                            else // go left
+                            {
+                                if (h2Cars[h2CarsIndex].car.Size != pbV1Car1.Size && h2Cars[h2CarsIndex].car.Location.X > lblLowerRightIntersection.Bounds.Left)
+                                {
+                                    h2Cars[h2CarsIndex].car.Size = pbV1Car1.Size;
+                                    h2Cars[h2CarsIndex].turned = true;
+                                }
+
+                                if (h2Cars[h2CarsIndex].car.Size == pbV1Car1.Size)
+                                    h2Cars[h2CarsIndex].car.Top -= h2Cars[h2CarsIndex].speed;
+                                else
+                                    h2Cars[h2CarsIndex].car.Left += h2Cars[h2CarsIndex].speed;
+                            }
+                        }
                     }
 
                     //check that car is still visible on stage
-                    if (h2Cars[h2CarsIndex].car.Bounds.Left > this.Bounds.Right + 500)
+                    if ((h2Cars[h2CarsIndex].turn == 2 && h2Cars[h2CarsIndex].car.Bounds.Left > this.Bounds.Right + 500) || 
+                        (h2Cars[h2CarsIndex].turn == 0 && h2Cars[h2CarsIndex].car.Bounds.Top > this.Bounds.Bottom + 500) ||
+                        (h2Cars[h2CarsIndex].turn == 1 && h2Cars[h2CarsIndex].car.Bounds.Bottom < this.Bounds.Top - 500))
                     {
                         // car has left stage
                         h2Cars[h2CarsIndex].car.Visible = false;
@@ -361,6 +487,8 @@ namespace TGOTL
                         h2Cars[h2CarsIndex].inUse = false;
 
                         h2Cars[h2CarsIndex].car.Location = pbH2Car1.Location;
+                        h2Cars[h2CarsIndex].car.Size = pbH2Car1.Size;
+                        h2Cars[h2CarsIndex].turned = false;
                         //this.Controls.Remove(h2Cars[h2CarsIndex].car); //?
                         //if (h2CarsIndex < h2CarsEndIndex - 1)
                         h2CarsIndex++;
@@ -372,25 +500,84 @@ namespace TGOTL
 
             if (v1CarsIndex != v1CarsEndIndex)
             {
+                if (v1Cars[v1CarsIndex].turn == -1)
+                    v1Cars[v1CarsIndex].turn = rnd.Next(3);
+
                 if (v1Cars[v1CarsIndex].car.Visible)
                 {
                     if (signalColorV == TrafficLightColor.GREEN)
-                        v1Cars[v1CarsIndex].car.Top -= v1Cars[v1CarsIndex].speed;
+                    {
+                        if (v1Cars[v1CarsIndex].turn == 2) // go straight
+                            v1Cars[v1CarsIndex].car.Top -= v1Cars[v1CarsIndex].speed;
+                        else if (v1Cars[v1CarsIndex].turn == 0) // go left
+                        {
+                            if (v1Cars[v1CarsIndex].car.Size != pbH1Car1.Size && v1Cars[v1CarsIndex].car.Location.Y < lblUpperRightIntersection.Bounds.Bottom - 40)
+                            {
+                                v1Cars[v1CarsIndex].car.Size = pbH1Car1.Size;
+                                v1Cars[v1CarsIndex].turned = true;
+                            }
+                            if (v1Cars[v1CarsIndex].car.Size == pbH1Car1.Size)
+                                v1Cars[v1CarsIndex].car.Left -= v1Cars[v1CarsIndex].speed;
+                            else
+                                v1Cars[v1CarsIndex].car.Top -= v1Cars[v1CarsIndex].speed;
+                        }
+                        else // go right
+                        {
+                            if (v1Cars[v1CarsIndex].car.Size != pbH1Car1.Size && v1Cars[v1CarsIndex].car.Location.Y < lblLowerRightIntersection.Bounds.Bottom - 45)
+                            {
+                                v1Cars[v1CarsIndex].car.Size = pbH1Car1.Size;
+                                v1Cars[v1CarsIndex].turned = true;
+                            }
+                            if (v1Cars[v1CarsIndex].car.Size == pbH1Car1.Size)
+                                v1Cars[v1CarsIndex].car.Left += v1Cars[v1CarsIndex].speed;
+                            else
+                                v1Cars[v1CarsIndex].car.Top -= v1Cars[v1CarsIndex].speed;
+                        }
+                    }
                     else /*if (signalColorH == TrafficLightColor.RED)*/
                     {
                         int currentSpeed = v1Cars[v1CarsIndex].speed;
                         int dummyY = v1Cars[v1CarsIndex].car.Location.Y - currentSpeed/*, dummyY = h1Cars[h1CarsIndex].car.Location.Y*/;
-                        if (dummyY < lblIntersectionArea.Bounds.Bottom && dummyY > lblIntersectionArea.Bounds.Top)
-                        { 
+                        if (!v1Cars[v1CarsIndex].turned && dummyY < lblIntersectionArea.Bounds.Bottom && dummyY > lblIntersectionArea.Bounds.Top)
+                        {
                             v1Cars[v1CarsIndex].car.Top = lblIntersectionArea.Bounds.Bottom;
                             v1Cars[v1CarsIndex].timeStopped += timeStageTimer.Interval;
                         }
                         else
-                            v1Cars[v1CarsIndex].car.Top -= v1Cars[v1CarsIndex].speed;
+                        {
+                            if (v1Cars[v1CarsIndex].turn == 2) // go straight
+                                v1Cars[v1CarsIndex].car.Top -= v1Cars[v1CarsIndex].speed;
+                            else if (v1Cars[v1CarsIndex].turn == 0) // go left
+                            {
+                                if (v1Cars[v1CarsIndex].car.Size != pbH1Car1.Size && v1Cars[v1CarsIndex].car.Location.Y < lblUpperRightIntersection.Bounds.Bottom - 40)
+                                {
+                                    v1Cars[v1CarsIndex].car.Size = pbH1Car1.Size;
+                                    v1Cars[v1CarsIndex].turned = true;
+                                }
+                                if (v1Cars[v1CarsIndex].car.Size == pbH1Car1.Size)
+                                    v1Cars[v1CarsIndex].car.Left -= v1Cars[v1CarsIndex].speed;
+                                else
+                                    v1Cars[v1CarsIndex].car.Top -= v1Cars[v1CarsIndex].speed;
+                            }
+                            else // go right
+                            {
+                                if (v1Cars[v1CarsIndex].car.Size != pbH1Car1.Size && v1Cars[v1CarsIndex].car.Location.Y < lblLowerRightIntersection.Bounds.Bottom - 45)
+                                {
+                                    v1Cars[v1CarsIndex].car.Size = pbH1Car1.Size;
+                                    v1Cars[v1CarsIndex].turned = true;
+                                }
+                                if (v1Cars[v1CarsIndex].car.Size == pbH1Car1.Size)
+                                    v1Cars[v1CarsIndex].car.Left += v1Cars[v1CarsIndex].speed;
+                                else
+                                    v1Cars[v1CarsIndex].car.Top -= v1Cars[v1CarsIndex].speed;
+                            }
+                        }
                     }
 
                     //check that car is still visible on stage
-                    if (v1Cars[v1CarsIndex].car.Bounds.Bottom < this.Bounds.Top - 500)
+                    if ((v1Cars[v1CarsIndex].turn == 2 && v1Cars[v1CarsIndex].car.Bounds.Bottom < this.Bounds.Top - 500) ||
+                        (v1Cars[v1CarsIndex].turn == 0 && v1Cars[v1CarsIndex].car.Bounds.Right < this.Bounds.Left - 500) || 
+                        (v1Cars[v1CarsIndex].turn == 1 && v1Cars[v1CarsIndex].car.Bounds.Left > this.Bounds.Right + 500))
                     {
                         // car has left stage
                         v1Cars[v1CarsIndex].car.Visible = false;
@@ -398,6 +585,8 @@ namespace TGOTL
                         v1Cars[v1CarsIndex].inUse = false;
 
                         v1Cars[v1CarsIndex].car.Location = pbV1Car1.Location;
+                        v1Cars[v1CarsIndex].car.Size = pbV1Car1.Size;
+                        v1Cars[v1CarsIndex].turned = false;
                         //this.Controls.Remove(v1Cars[v1CarsIndex].car); //?
                         //if (v1CarsIndex < v1CarsEndIndex - 1)
                         v1CarsIndex++;
@@ -409,25 +598,84 @@ namespace TGOTL
 
             if (v2CarsIndex != v2CarsEndIndex)
             {
+                if (v2Cars[v2CarsIndex].turn == -1)
+                    v2Cars[v2CarsIndex].turn = rnd.Next(3);
+
                 if (v2Cars[v2CarsIndex].car.Visible)
                 {
                     if (signalColorV == TrafficLightColor.GREEN)
-                        v2Cars[v2CarsIndex].car.Top += v2Cars[v2CarsIndex].speed;
+                    {
+                        if (v2Cars[v2CarsIndex].turn == 2) // go straight
+                            v2Cars[v2CarsIndex].car.Top += v2Cars[v2CarsIndex].speed;
+                        else if (v2Cars[v2CarsIndex].turn == 0) // go right
+                        {
+                            if (v2Cars[v2CarsIndex].car.Size != pbH1Car1.Size && v2Cars[v2CarsIndex].car.Location.Y > lblUpperLeftIntersection.Bounds.Top - 30)
+                            {
+                                v2Cars[v2CarsIndex].car.Size = pbH1Car1.Size;
+                                v2Cars[v2CarsIndex].turned = true;
+                            }
+                            if (v2Cars[v2CarsIndex].car.Size == pbH1Car1.Size)
+                                v2Cars[v2CarsIndex].car.Left -= v2Cars[v2CarsIndex].speed;
+                            else
+                                v2Cars[v2CarsIndex].car.Top += v2Cars[v2CarsIndex].speed;
+                        }
+                        else // go left
+                        {
+                            if (v2Cars[v2CarsIndex].car.Size != pbH1Car1.Size && v2Cars[v2CarsIndex].car.Location.Y > lblLowerLeftIntersection.Bounds.Top + 40)
+                            {
+                                v2Cars[v2CarsIndex].car.Size = pbH1Car1.Size;
+                                v2Cars[v2CarsIndex].turned = true;
+                            }
+                            if (v2Cars[v2CarsIndex].car.Size == pbH1Car1.Size)
+                                v2Cars[v2CarsIndex].car.Left += v2Cars[v2CarsIndex].speed;
+                            else
+                                v2Cars[v2CarsIndex].car.Top += v2Cars[v2CarsIndex].speed;
+                        }
+                    }
                     else /*if (signalColorH == TrafficLightColor.RED)*/
                     {
                         int currentSpeed = v2Cars[v2CarsIndex].speed;
                         int dummyY = v2Cars[v2CarsIndex].car.Location.Y + currentSpeed/*, dummyY = h1Cars[h1CarsIndex].car.Location.Y*/;
-                        if (dummyY < lblIntersectionArea.Bounds.Bottom && dummyY > lblIntersectionArea.Bounds.Top - 100)
+                        if (!v2Cars[v2CarsIndex].turned && dummyY < lblIntersectionArea.Bounds.Bottom && dummyY > lblIntersectionArea.Bounds.Top - 100)
                         {
                             v2Cars[v2CarsIndex].car.Top = lblIntersectionArea.Bounds.Top - 100;
                             v2Cars[v2CarsIndex].timeStopped += timeStageTimer.Interval;
                         }
                         else
-                            v2Cars[v2CarsIndex].car.Top += v2Cars[v2CarsIndex].speed;
+                        {
+                            if (v2Cars[v2CarsIndex].turn == 2) // go straight
+                                v2Cars[v2CarsIndex].car.Top += v2Cars[v2CarsIndex].speed;
+                            else if (v2Cars[v2CarsIndex].turn == 0) // go right
+                            {
+                                if (v2Cars[v2CarsIndex].car.Size != pbH1Car1.Size && v2Cars[v2CarsIndex].car.Location.Y > lblUpperLeftIntersection.Bounds.Top - 30)
+                                {
+                                    v2Cars[v2CarsIndex].car.Size = pbH1Car1.Size;
+                                    v2Cars[v2CarsIndex].turned = true;
+                                }
+                                if (v2Cars[v2CarsIndex].car.Size == pbH1Car1.Size)
+                                    v2Cars[v2CarsIndex].car.Left -= v2Cars[v2CarsIndex].speed;
+                                else
+                                    v2Cars[v2CarsIndex].car.Top += v2Cars[v2CarsIndex].speed;
+                            }
+                            else // go left
+                            {
+                                if (v2Cars[v2CarsIndex].car.Size != pbH1Car1.Size && v2Cars[v2CarsIndex].car.Location.Y > lblLowerLeftIntersection.Bounds.Top + 40)
+                                {
+                                    v2Cars[v2CarsIndex].car.Size = pbH1Car1.Size;
+                                    v2Cars[v2CarsIndex].turned = true;
+                                }
+                                if (v2Cars[v2CarsIndex].car.Size == pbH1Car1.Size)
+                                    v2Cars[v2CarsIndex].car.Left += v2Cars[v2CarsIndex].speed;
+                                else
+                                    v2Cars[v2CarsIndex].car.Top += v2Cars[v2CarsIndex].speed;
+                            }
+                        }
                     }
 
                     //check that car is still visible on stage
-                    if (v2Cars[v2CarsIndex].car.Bounds.Top > this.Bounds.Bottom + 500)
+                    if ((v2Cars[v2CarsIndex].turn == 2 && v2Cars[v2CarsIndex].car.Bounds.Top > this.Bounds.Bottom + 500) ||
+                        (v2Cars[v2CarsIndex].turn == 0 && v2Cars[v2CarsIndex].car.Bounds.Right < this.Bounds.Left - 500) || 
+                        (v2Cars[v2CarsIndex].turn == 1 && v2Cars[v2CarsIndex].car.Bounds.Left > this.Bounds.Right + 500))
                     {
                         // car has left stage
                         v2Cars[v2CarsIndex].car.Visible = false;
@@ -458,63 +706,190 @@ namespace TGOTL
             //MOVING ONE CAR/LANE AT A TIME
             if (h1CarsIndex != h1CarsEndIndex)
             {
+                if (h1Cars[h1CarsIndex].turn == -1)
+                    h1Cars[h1CarsIndex].turn = rnd.Next(3);
+
                 //lblStageScore.Text = "";
                 if (h1Cars[h1CarsIndex].car.Visible)
                 {
                     if (signalColorH == TrafficLightColor.GREEN)
-                        h1Cars[h1CarsIndex].car.Left -= h1Cars[h1CarsIndex].speed;
+                    {
+                        if (h1Cars[h1CarsIndex].turn == 2) // go straight
+                            h1Cars[h1CarsIndex].car.Left -= h1Cars[h1CarsIndex].speed;
+                        else if (h1Cars[h1CarsIndex].turn == 0) // go left
+                        {
+                            if (h1Cars[h1CarsIndex].car.Size != pbV1Car1.Size && h1Cars[h1CarsIndex].car.Location.X < lblUpperLeftIntersection.Bounds.Right - 37)
+                            {
+                                h1Cars[h1CarsIndex].car.Size = pbV1Car1.Size;
+                                h1Cars[h1CarsIndex].turned = true;
+                            }
+                            if (h1Cars[h1CarsIndex].car.Size == pbV1Car1.Size)
+                                h1Cars[h1CarsIndex].car.Top += h1Cars[h1CarsIndex].speed;
+                            else
+                                h1Cars[h1CarsIndex].car.Left -= h1Cars[h1CarsIndex].speed;
+                        }
+                        else // go right
+                        {
+                            if (h1Cars[h1CarsIndex].car.Size != pbV1Car1.Size && h1Cars[h1CarsIndex].car.Location.X < lblUpperRightIntersection.Bounds.Right - 37)
+                            {
+                                h1Cars[h1CarsIndex].car.Size = pbV1Car1.Size;
+                                h1Cars[h1CarsIndex].turned = true;
+                            }
+                            if (h1Cars[h1CarsIndex].car.Size == pbV1Car1.Size)
+                                h1Cars[h1CarsIndex].car.Top -= h1Cars[h1CarsIndex].speed;
+                            else
+                                h1Cars[h1CarsIndex].car.Left -= h1Cars[h1CarsIndex].speed;
+                        }
+                    }
                     else /*if (signalColorH == TrafficLightColor.RED)*/
                     {
                         int currentSpeed = h1Cars[h1CarsIndex].speed;
                         int dummyX = h1Cars[h1CarsIndex].car.Location.X - currentSpeed/*, dummyY = h1Cars[h1CarsIndex].car.Location.Y*/;
-                        if (dummyX < lblIntersectionArea.Bounds.Right && dummyX > lblIntersectionArea.Bounds.Left)
+                        if (!h1Cars[h1CarsIndex].turned && dummyX < lblIntersectionArea.Bounds.Right && dummyX > lblIntersectionArea.Bounds.Left)
                         {
                             h1Cars[h1CarsIndex].car.Left = lblIntersectionArea.Bounds.Right;
                             h1Cars[h1CarsIndex].timeStopped += timeStageTimer.Interval;
                         }
                         else
-                            h1Cars[h1CarsIndex].car.Left -= h1Cars[h1CarsIndex].speed;
+                        {
+                            if (h1Cars[h1CarsIndex].turn == 2) // go straight
+                                h1Cars[h1CarsIndex].car.Left -= h1Cars[h1CarsIndex].speed;
+                            else if (h1Cars[h1CarsIndex].turn == 0) // go left
+                            {
+                                if (h1Cars[h1CarsIndex].car.Size != pbV1Car1.Size && h1Cars[h1CarsIndex].car.Location.X < lblUpperLeftIntersection.Bounds.Right - 37)
+                                {
+                                    h1Cars[h1CarsIndex].car.Size = pbV1Car1.Size;
+                                    h1Cars[h1CarsIndex].turned = true;
+                                }
+                                if (h1Cars[h1CarsIndex].car.Size == pbV1Car1.Size)
+                                    h1Cars[h1CarsIndex].car.Top += h1Cars[h1CarsIndex].speed;
+                                else
+                                    h1Cars[h1CarsIndex].car.Left -= h1Cars[h1CarsIndex].speed;
+                            }
+                            else // go right
+                            {
+                                if (h1Cars[h1CarsIndex].car.Size != pbV1Car1.Size && h1Cars[h1CarsIndex].car.Location.X < lblUpperRightIntersection.Bounds.Right - 37)
+                                {
+                                    h1Cars[h1CarsIndex].car.Size = pbV1Car1.Size;
+                                    h1Cars[h1CarsIndex].turned = true;
+                                }
+                                if (h1Cars[h1CarsIndex].car.Size == pbV1Car1.Size)
+                                    h1Cars[h1CarsIndex].car.Top -= h1Cars[h1CarsIndex].speed;
+                                else
+                                    h1Cars[h1CarsIndex].car.Left -= h1Cars[h1CarsIndex].speed;
+                            }
+                        }
                     }
 
                     //check that car is still visible on stage
-                    if (h1Cars[h1CarsIndex].car.Bounds.Right < this.Bounds.Left - 500)
+                    if ((h1Cars[h1CarsIndex].turn == 2 && h1Cars[h1CarsIndex].car.Bounds.Right < this.Bounds.Left - 500) ||
+                        (h1Cars[h1CarsIndex].turn == 0 && h1Cars[h1CarsIndex].car.Bounds.Top > this.Bounds.Bottom + 500) ||
+                        (h1Cars[h1CarsIndex].turn == 1 && h1Cars[h1CarsIndex].car.Bounds.Bottom < this.Bounds.Top - 500))
                     {
                         // car has left stage
+
                         h1Cars[h1CarsIndex].car.Visible = false;
                         h1Cars[h1CarsIndex].wasUsed = true;
                         h1Cars[h1CarsIndex].inUse = false;
 
                         h1Cars[h1CarsIndex].car.Location = pbH1Car1.Location;
+                        h1Cars[h1CarsIndex].car.Size = pbH1Car1.Size;
+                        h1Cars[h1CarsIndex].turned = false;
+                        //this.Controls.Remove(h1Cars[h1CarsIndex].car); //?
+                        //if (h1CarsIndex < h1CarsEndIndex - 1)
                         h1CarsIndex++;
-
-
                     }
                 }
                 else
                     h1Cars[h1CarsIndex].car.Visible = true;
             }
+            //else
+            //lblStageScore.Text = "same";
 
             if (h2CarsIndex != h2CarsEndIndex)
             {
+                if (h2Cars[h2CarsIndex].turn == -1)
+                    h2Cars[h2CarsIndex].turn = rnd.Next(3);
+
                 if (h2Cars[h2CarsIndex].car.Visible)
                 {
                     if (signalColorH == TrafficLightColor.GREEN)
-                        h2Cars[h2CarsIndex].car.Left += h2Cars[h2CarsIndex].speed;
+                    {
+                        if (h2Cars[h2CarsIndex].turn == 2) //go straight
+                            h2Cars[h2CarsIndex].car.Left += h2Cars[h2CarsIndex].speed;
+                        else if (h2Cars[h2CarsIndex].turn == 0) // go right
+                        {
+                            if (h2Cars[h2CarsIndex].car.Size != pbV1Car1.Size && h2Cars[h2CarsIndex].car.Location.X > lblLowerLeftIntersection.Bounds.Left)
+                            {
+                                h2Cars[h2CarsIndex].car.Size = pbV1Car1.Size;
+                                h2Cars[h2CarsIndex].turned = true;
+                            }
+
+                            if (h2Cars[h2CarsIndex].car.Size == pbV1Car1.Size)
+                                h2Cars[h2CarsIndex].car.Top += h2Cars[h2CarsIndex].speed;
+                            else
+                                h2Cars[h2CarsIndex].car.Left += h2Cars[h2CarsIndex].speed;
+                        }
+                        else // go left
+                        {
+                            if (h2Cars[h2CarsIndex].car.Size != pbV1Car1.Size && h2Cars[h2CarsIndex].car.Location.X > lblLowerRightIntersection.Bounds.Left)
+                            {
+                                h2Cars[h2CarsIndex].car.Size = pbV1Car1.Size;
+                                h2Cars[h2CarsIndex].turned = true;
+                            }
+
+                            if (h2Cars[h2CarsIndex].car.Size == pbV1Car1.Size)
+                                h2Cars[h2CarsIndex].car.Top -= h2Cars[h2CarsIndex].speed;
+                            else
+                                h2Cars[h2CarsIndex].car.Left += h2Cars[h2CarsIndex].speed;
+                        }
+                    }
                     else /*if (signalColorH == TrafficLightColor.RED)*/
                     {
                         int currentSpeed = h2Cars[h2CarsIndex].speed;
                         int dummyX = h2Cars[h2CarsIndex].car.Location.X + currentSpeed/*, dummyY = h1Cars[h1CarsIndex].car.Location.Y*/;
-                        if (dummyX < lblIntersectionArea.Bounds.Right && dummyX > lblIntersectionArea.Bounds.Left - 100)
+                        if (!h2Cars[h2CarsIndex].turned && dummyX < lblIntersectionArea.Bounds.Right && dummyX > lblIntersectionArea.Bounds.Left - 100)
                         {
                             h2Cars[h2CarsIndex].car.Left = lblIntersectionArea.Bounds.Left - 100;
                             h2Cars[h2CarsIndex].timeStopped += timeStageTimer.Interval;
                         }
                         else
-                            h2Cars[h2CarsIndex].car.Left += h2Cars[h2CarsIndex].speed;
+                        {
+                            if (h2Cars[h2CarsIndex].turn == 2) //go straight
+                                h2Cars[h2CarsIndex].car.Left += h2Cars[h2CarsIndex].speed;
+                            else if (h2Cars[h2CarsIndex].turn == 0) // go right
+                            {
+                                if (h2Cars[h2CarsIndex].car.Size != pbV1Car1.Size && h2Cars[h2CarsIndex].car.Location.X > lblLowerLeftIntersection.Bounds.Left)
+                                {
+                                    h2Cars[h2CarsIndex].car.Size = pbV1Car1.Size;
+                                    h2Cars[h2CarsIndex].turned = true;
+                                }
+
+                                if (h2Cars[h2CarsIndex].car.Size == pbV1Car1.Size)
+                                    h2Cars[h2CarsIndex].car.Top += h2Cars[h2CarsIndex].speed;
+                                else
+                                    h2Cars[h2CarsIndex].car.Left += h2Cars[h2CarsIndex].speed;
+                            }
+                            else // go left
+                            {
+                                if (h2Cars[h2CarsIndex].car.Size != pbV1Car1.Size && h2Cars[h2CarsIndex].car.Location.X > lblLowerRightIntersection.Bounds.Left)
+                                {
+                                    h2Cars[h2CarsIndex].car.Size = pbV1Car1.Size;
+                                    h2Cars[h2CarsIndex].turned = true;
+                                }
+
+                                if (h2Cars[h2CarsIndex].car.Size == pbV1Car1.Size)
+                                    h2Cars[h2CarsIndex].car.Top -= h2Cars[h2CarsIndex].speed;
+                                else
+                                    h2Cars[h2CarsIndex].car.Left += h2Cars[h2CarsIndex].speed;
+                            }
+                        }
                     }
 
                     //check that car is still visible on stage
-                    if (h2Cars[h2CarsIndex].car.Bounds.Left > this.Bounds.Right + 500)
+                    if ((h2Cars[h2CarsIndex].turn == 2 && h2Cars[h2CarsIndex].car.Bounds.Left > this.Bounds.Right + 500) ||
+                        (h2Cars[h2CarsIndex].turn == 0 && h2Cars[h2CarsIndex].car.Bounds.Top > this.Bounds.Bottom + 500) ||
+                        (h2Cars[h2CarsIndex].turn == 1 && h2Cars[h2CarsIndex].car.Bounds.Bottom < this.Bounds.Top - 500))
                     {
                         // car has left stage
                         h2Cars[h2CarsIndex].car.Visible = false;
@@ -522,6 +897,8 @@ namespace TGOTL
                         h2Cars[h2CarsIndex].inUse = false;
 
                         h2Cars[h2CarsIndex].car.Location = pbH2Car1.Location;
+                        h2Cars[h2CarsIndex].car.Size = pbH2Car1.Size;
+                        h2Cars[h2CarsIndex].turned = false;
                         //this.Controls.Remove(h2Cars[h2CarsIndex].car); //?
                         //if (h2CarsIndex < h2CarsEndIndex - 1)
                         h2CarsIndex++;
@@ -533,25 +910,84 @@ namespace TGOTL
 
             if (v1CarsIndex != v1CarsEndIndex)
             {
+                if (v1Cars[v1CarsIndex].turn == -1)
+                    v1Cars[v1CarsIndex].turn = rnd.Next(3);
+
                 if (v1Cars[v1CarsIndex].car.Visible)
                 {
                     if (signalColorV == TrafficLightColor.GREEN)
-                        v1Cars[v1CarsIndex].car.Top -= v1Cars[v1CarsIndex].speed;
+                    {
+                        if (v1Cars[v1CarsIndex].turn == 2) // go straight
+                            v1Cars[v1CarsIndex].car.Top -= v1Cars[v1CarsIndex].speed;
+                        else if (v1Cars[v1CarsIndex].turn == 0) // go left
+                        {
+                            if (v1Cars[v1CarsIndex].car.Size != pbH1Car1.Size && v1Cars[v1CarsIndex].car.Location.Y < lblUpperRightIntersection.Bounds.Bottom - 40)
+                            {
+                                v1Cars[v1CarsIndex].car.Size = pbH1Car1.Size;
+                                v1Cars[v1CarsIndex].turned = true;
+                            }
+                            if (v1Cars[v1CarsIndex].car.Size == pbH1Car1.Size)
+                                v1Cars[v1CarsIndex].car.Left -= v1Cars[v1CarsIndex].speed;
+                            else
+                                v1Cars[v1CarsIndex].car.Top -= v1Cars[v1CarsIndex].speed;
+                        }
+                        else // go right
+                        {
+                            if (v1Cars[v1CarsIndex].car.Size != pbH1Car1.Size && v1Cars[v1CarsIndex].car.Location.Y < lblLowerRightIntersection.Bounds.Bottom - 45)
+                            {
+                                v1Cars[v1CarsIndex].car.Size = pbH1Car1.Size;
+                                v1Cars[v1CarsIndex].turned = true;
+                            }
+                            if (v1Cars[v1CarsIndex].car.Size == pbH1Car1.Size)
+                                v1Cars[v1CarsIndex].car.Left += v1Cars[v1CarsIndex].speed;
+                            else
+                                v1Cars[v1CarsIndex].car.Top -= v1Cars[v1CarsIndex].speed;
+                        }
+                    }
                     else /*if (signalColorH == TrafficLightColor.RED)*/
                     {
                         int currentSpeed = v1Cars[v1CarsIndex].speed;
                         int dummyY = v1Cars[v1CarsIndex].car.Location.Y - currentSpeed/*, dummyY = h1Cars[h1CarsIndex].car.Location.Y*/;
-                        if (dummyY < lblIntersectionArea.Bounds.Bottom && dummyY > lblIntersectionArea.Bounds.Top)
+                        if (!v1Cars[v1CarsIndex].turned && dummyY < lblIntersectionArea.Bounds.Bottom && dummyY > lblIntersectionArea.Bounds.Top)
                         {
                             v1Cars[v1CarsIndex].car.Top = lblIntersectionArea.Bounds.Bottom;
                             v1Cars[v1CarsIndex].timeStopped += timeStageTimer.Interval;
                         }
                         else
-                            v1Cars[v1CarsIndex].car.Top -= v1Cars[v1CarsIndex].speed;
+                        {
+                            if (v1Cars[v1CarsIndex].turn == 2) // go straight
+                                v1Cars[v1CarsIndex].car.Top -= v1Cars[v1CarsIndex].speed;
+                            else if (v1Cars[v1CarsIndex].turn == 0) // go left
+                            {
+                                if (v1Cars[v1CarsIndex].car.Size != pbH1Car1.Size && v1Cars[v1CarsIndex].car.Location.Y < lblUpperRightIntersection.Bounds.Bottom - 40)
+                                {
+                                    v1Cars[v1CarsIndex].car.Size = pbH1Car1.Size;
+                                    v1Cars[v1CarsIndex].turned = true;
+                                }
+                                if (v1Cars[v1CarsIndex].car.Size == pbH1Car1.Size)
+                                    v1Cars[v1CarsIndex].car.Left -= v1Cars[v1CarsIndex].speed;
+                                else
+                                    v1Cars[v1CarsIndex].car.Top -= v1Cars[v1CarsIndex].speed;
+                            }
+                            else // go right
+                            {
+                                if (v1Cars[v1CarsIndex].car.Size != pbH1Car1.Size && v1Cars[v1CarsIndex].car.Location.Y < lblLowerRightIntersection.Bounds.Bottom - 45)
+                                {
+                                    v1Cars[v1CarsIndex].car.Size = pbH1Car1.Size;
+                                    v1Cars[v1CarsIndex].turned = true;
+                                }
+                                if (v1Cars[v1CarsIndex].car.Size == pbH1Car1.Size)
+                                    v1Cars[v1CarsIndex].car.Left += v1Cars[v1CarsIndex].speed;
+                                else
+                                    v1Cars[v1CarsIndex].car.Top -= v1Cars[v1CarsIndex].speed;
+                            }
+                        }
                     }
 
                     //check that car is still visible on stage
-                    if (v1Cars[v1CarsIndex].car.Bounds.Bottom < this.Bounds.Top - 500)
+                    if ((v1Cars[v1CarsIndex].turn == 2 && v1Cars[v1CarsIndex].car.Bounds.Bottom < this.Bounds.Top - 500) ||
+                        (v1Cars[v1CarsIndex].turn == 0 && v1Cars[v1CarsIndex].car.Bounds.Right < this.Bounds.Left - 500) ||
+                        (v1Cars[v1CarsIndex].turn == 1 && v1Cars[v1CarsIndex].car.Bounds.Left > this.Bounds.Right + 500))
                     {
                         // car has left stage
                         v1Cars[v1CarsIndex].car.Visible = false;
@@ -559,6 +995,8 @@ namespace TGOTL
                         v1Cars[v1CarsIndex].inUse = false;
 
                         v1Cars[v1CarsIndex].car.Location = pbV1Car1.Location;
+                        v1Cars[v1CarsIndex].car.Size = pbV1Car1.Size;
+                        v1Cars[v1CarsIndex].turned = false;
                         //this.Controls.Remove(v1Cars[v1CarsIndex].car); //?
                         //if (v1CarsIndex < v1CarsEndIndex - 1)
                         v1CarsIndex++;
@@ -570,25 +1008,84 @@ namespace TGOTL
 
             if (v2CarsIndex != v2CarsEndIndex)
             {
+                if (v2Cars[v2CarsIndex].turn == -1)
+                    v2Cars[v2CarsIndex].turn = rnd.Next(3);
+
                 if (v2Cars[v2CarsIndex].car.Visible)
                 {
                     if (signalColorV == TrafficLightColor.GREEN)
-                        v2Cars[v2CarsIndex].car.Top += v2Cars[v2CarsIndex].speed;
+                    {
+                        if (v2Cars[v2CarsIndex].turn == 2) // go straight
+                            v2Cars[v2CarsIndex].car.Top += v2Cars[v2CarsIndex].speed;
+                        else if (v2Cars[v2CarsIndex].turn == 0) // go right
+                        {
+                            if (v2Cars[v2CarsIndex].car.Size != pbH1Car1.Size && v2Cars[v2CarsIndex].car.Location.Y > lblUpperLeftIntersection.Bounds.Top - 30)
+                            {
+                                v2Cars[v2CarsIndex].car.Size = pbH1Car1.Size;
+                                v2Cars[v2CarsIndex].turned = true;
+                            }
+                            if (v2Cars[v2CarsIndex].car.Size == pbH1Car1.Size)
+                                v2Cars[v2CarsIndex].car.Left -= v2Cars[v2CarsIndex].speed;
+                            else
+                                v2Cars[v2CarsIndex].car.Top += v2Cars[v2CarsIndex].speed;
+                        }
+                        else // go left
+                        {
+                            if (v2Cars[v2CarsIndex].car.Size != pbH1Car1.Size && v2Cars[v2CarsIndex].car.Location.Y > lblLowerLeftIntersection.Bounds.Top + 40)
+                            {
+                                v2Cars[v2CarsIndex].car.Size = pbH1Car1.Size;
+                                v2Cars[v2CarsIndex].turned = true;
+                            }
+                            if (v2Cars[v2CarsIndex].car.Size == pbH1Car1.Size)
+                                v2Cars[v2CarsIndex].car.Left += v2Cars[v2CarsIndex].speed;
+                            else
+                                v2Cars[v2CarsIndex].car.Top += v2Cars[v2CarsIndex].speed;
+                        }
+                    }
                     else /*if (signalColorH == TrafficLightColor.RED)*/
                     {
                         int currentSpeed = v2Cars[v2CarsIndex].speed;
                         int dummyY = v2Cars[v2CarsIndex].car.Location.Y + currentSpeed/*, dummyY = h1Cars[h1CarsIndex].car.Location.Y*/;
-                        if (dummyY < lblIntersectionArea.Bounds.Bottom && dummyY > lblIntersectionArea.Bounds.Top - 100)
+                        if (!v2Cars[v2CarsIndex].turned && dummyY < lblIntersectionArea.Bounds.Bottom && dummyY > lblIntersectionArea.Bounds.Top - 100)
                         {
                             v2Cars[v2CarsIndex].car.Top = lblIntersectionArea.Bounds.Top - 100;
                             v2Cars[v2CarsIndex].timeStopped += timeStageTimer.Interval;
                         }
                         else
-                            v2Cars[v2CarsIndex].car.Top += v2Cars[v2CarsIndex].speed;
+                        {
+                            if (v2Cars[v2CarsIndex].turn == 2) // go straight
+                                v2Cars[v2CarsIndex].car.Top += v2Cars[v2CarsIndex].speed;
+                            else if (v2Cars[v2CarsIndex].turn == 0) // go right
+                            {
+                                if (v2Cars[v2CarsIndex].car.Size != pbH1Car1.Size && v2Cars[v2CarsIndex].car.Location.Y > lblUpperLeftIntersection.Bounds.Top - 30)
+                                {
+                                    v2Cars[v2CarsIndex].car.Size = pbH1Car1.Size;
+                                    v2Cars[v2CarsIndex].turned = true;
+                                }
+                                if (v2Cars[v2CarsIndex].car.Size == pbH1Car1.Size)
+                                    v2Cars[v2CarsIndex].car.Left -= v2Cars[v2CarsIndex].speed;
+                                else
+                                    v2Cars[v2CarsIndex].car.Top += v2Cars[v2CarsIndex].speed;
+                            }
+                            else // go left
+                            {
+                                if (v2Cars[v2CarsIndex].car.Size != pbH1Car1.Size && v2Cars[v2CarsIndex].car.Location.Y > lblLowerLeftIntersection.Bounds.Top + 40)
+                                {
+                                    v2Cars[v2CarsIndex].car.Size = pbH1Car1.Size;
+                                    v2Cars[v2CarsIndex].turned = true;
+                                }
+                                if (v2Cars[v2CarsIndex].car.Size == pbH1Car1.Size)
+                                    v2Cars[v2CarsIndex].car.Left += v2Cars[v2CarsIndex].speed;
+                                else
+                                    v2Cars[v2CarsIndex].car.Top += v2Cars[v2CarsIndex].speed;
+                            }
+                        }
                     }
 
                     //check that car is still visible on stage
-                    if (v2Cars[v2CarsIndex].car.Bounds.Top > this.Bounds.Bottom + 500)
+                    if ((v2Cars[v2CarsIndex].turn == 2 && v2Cars[v2CarsIndex].car.Bounds.Top > this.Bounds.Bottom + 500) ||
+                        (v2Cars[v2CarsIndex].turn == 0 && v2Cars[v2CarsIndex].car.Bounds.Right < this.Bounds.Left - 500) ||
+                        (v2Cars[v2CarsIndex].turn == 1 && v2Cars[v2CarsIndex].car.Bounds.Left > this.Bounds.Right + 500))
                     {
                         // car has left stage
                         v2Cars[v2CarsIndex].car.Visible = false;
@@ -760,11 +1257,11 @@ namespace TGOTL
 
             if (stagePhase == StagePhase.PRE)
             {
-                game.Stages[0].InitialScore = avg;
+                game.Stages[2].InitialScore = avg;
                 lblStageScore.Text += avg + "";
             }
             else
-                game.Stages[0].CurrentPlayerScore = avg;
+                game.Stages[2].CurrentPlayerScore = avg;
         }
 
         private void ResetCars()
@@ -825,6 +1322,7 @@ namespace TGOTL
                 SetCarColor(c.car);
                 c.speed = SetCarSpeed(c); // carspeed() needs to return int cuz it isn't in cars array yet
                 c.timeStopped = 0;
+                c.turn = -1;
 
                 //determine starting position of car
                 int carDirection = rnd.Next(4) + 1;
