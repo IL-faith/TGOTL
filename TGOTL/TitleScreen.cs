@@ -191,9 +191,9 @@ namespace TGOTL
         {
             if (playstyle.Equals("mouse"))
             {
-                TutorialScreen viewTutorial = new TutorialScreen(this.Location, game);
+                TutorialScreen viewTutorial = new TutorialScreen(this.Location, game, this);
                 viewTutorial.Show();
-                this.Close();
+                this.Hide();
             }
         }
 
@@ -283,9 +283,9 @@ namespace TGOTL
                             }
                             break;
                         case 3:
-                            TutorialScreen viewTutorial = new TutorialScreen(this.Location, game);
+                            TutorialScreen viewTutorial = new TutorialScreen(this.Location, game, this);
                             viewTutorial.Show();
-                            this.Close();
+                            this.Hide();
                             break;
                         case 4:
                             playstyle = "mouse";

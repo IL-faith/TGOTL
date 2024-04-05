@@ -28,28 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pbTutorialImage = new System.Windows.Forms.PictureBox();
             this.lblTutorial = new System.Windows.Forms.Label();
             this.lblBackBtn = new System.Windows.Forms.Label();
-            this.pbPrevArrow = new System.Windows.Forms.PictureBox();
-            this.pbNextArrow = new System.Windows.Forms.PictureBox();
             this.lblSelect0BackBtn = new System.Windows.Forms.Label();
             this.lblSelect1PrevArrow = new System.Windows.Forms.Label();
             this.lblSelect2NextArrow = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pbTutorialImage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbPrevArrow)).BeginInit();
+            this.pbNextArrow = new System.Windows.Forms.PictureBox();
+            this.pbPrevArrow = new System.Windows.Forms.PictureBox();
+            this.pbTutorialImage = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbNextArrow)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPrevArrow)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbTutorialImage)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pbTutorialImage
-            // 
-            this.pbTutorialImage.BackColor = System.Drawing.SystemColors.Info;
-            this.pbTutorialImage.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pbTutorialImage.Location = new System.Drawing.Point(0, 134);
-            this.pbTutorialImage.Name = "pbTutorialImage";
-            this.pbTutorialImage.Size = new System.Drawing.Size(1160, 622);
-            this.pbTutorialImage.TabIndex = 0;
-            this.pbTutorialImage.TabStop = false;
             // 
             // lblTutorial
             // 
@@ -75,24 +65,6 @@
             this.lblBackBtn.Text = "Back";
             this.lblBackBtn.MouseClick += new System.Windows.Forms.MouseEventHandler(this.BackBtnClick);
             // 
-            // pbPrevArrow
-            // 
-            this.pbPrevArrow.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.pbPrevArrow.Location = new System.Drawing.Point(34, 651);
-            this.pbPrevArrow.Name = "pbPrevArrow";
-            this.pbPrevArrow.Size = new System.Drawing.Size(140, 74);
-            this.pbPrevArrow.TabIndex = 5;
-            this.pbPrevArrow.TabStop = false;
-            // 
-            // pbNextArrow
-            // 
-            this.pbNextArrow.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.pbNextArrow.Location = new System.Drawing.Point(980, 651);
-            this.pbNextArrow.Name = "pbNextArrow";
-            this.pbNextArrow.Size = new System.Drawing.Size(140, 74);
-            this.pbNextArrow.TabIndex = 5;
-            this.pbNextArrow.TabStop = false;
-            // 
             // lblSelect0BackBtn
             // 
             this.lblSelect0BackBtn.BackColor = System.Drawing.Color.DeepSkyBlue;
@@ -105,6 +77,7 @@
             this.lblSelect0BackBtn.TabIndex = 6;
             this.lblSelect0BackBtn.Tag = "select";
             this.lblSelect0BackBtn.Text = "BACK";
+            this.lblSelect0BackBtn.Visible = false;
             // 
             // lblSelect1PrevArrow
             // 
@@ -118,6 +91,7 @@
             this.lblSelect1PrevArrow.TabIndex = 30;
             this.lblSelect1PrevArrow.Tag = "select";
             this.lblSelect1PrevArrow.Text = "BACK";
+            this.lblSelect1PrevArrow.Visible = false;
             // 
             // lblSelect2NextArrow
             // 
@@ -131,6 +105,43 @@
             this.lblSelect2NextArrow.TabIndex = 29;
             this.lblSelect2NextArrow.Tag = "select";
             this.lblSelect2NextArrow.Text = "BACK";
+            this.lblSelect2NextArrow.Visible = false;
+            // 
+            // pbNextArrow
+            // 
+            this.pbNextArrow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(79)))), ((int)(((byte)(114)))));
+            this.pbNextArrow.BackgroundImage = global::TGOTL.Properties.Resources.next_transparent;
+            this.pbNextArrow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pbNextArrow.Location = new System.Drawing.Point(980, 651);
+            this.pbNextArrow.Name = "pbNextArrow";
+            this.pbNextArrow.Size = new System.Drawing.Size(140, 74);
+            this.pbNextArrow.TabIndex = 5;
+            this.pbNextArrow.TabStop = false;
+            this.pbNextArrow.Click += new System.EventHandler(this.pbNextArrow_Click);
+            // 
+            // pbPrevArrow
+            // 
+            this.pbPrevArrow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(79)))), ((int)(((byte)(114)))));
+            this.pbPrevArrow.BackgroundImage = global::TGOTL.Properties.Resources.back_transparent;
+            this.pbPrevArrow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pbPrevArrow.Location = new System.Drawing.Point(34, 651);
+            this.pbPrevArrow.Name = "pbPrevArrow";
+            this.pbPrevArrow.Size = new System.Drawing.Size(140, 74);
+            this.pbPrevArrow.TabIndex = 5;
+            this.pbPrevArrow.TabStop = false;
+            this.pbPrevArrow.Visible = false;
+            this.pbPrevArrow.Click += new System.EventHandler(this.pbPrevArrow_Click);
+            // 
+            // pbTutorialImage
+            // 
+            this.pbTutorialImage.BackColor = System.Drawing.SystemColors.Info;
+            this.pbTutorialImage.BackgroundImage = global::TGOTL.Properties.Resources.tutorial_one;
+            this.pbTutorialImage.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pbTutorialImage.Location = new System.Drawing.Point(0, 134);
+            this.pbTutorialImage.Name = "pbTutorialImage";
+            this.pbTutorialImage.Size = new System.Drawing.Size(1160, 622);
+            this.pbTutorialImage.TabIndex = 0;
+            this.pbTutorialImage.TabStop = false;
             // 
             // TutorialScreen
             // 
@@ -149,9 +160,10 @@
             this.Name = "TutorialScreen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "The Game of Traffic Lights";
-            ((System.ComponentModel.ISupportInitialize)(this.pbTutorialImage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbPrevArrow)).EndInit();
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyboardKeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.pbNextArrow)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPrevArrow)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbTutorialImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
