@@ -253,10 +253,10 @@
     <value>662, 17</value>
   </metadata>
   <metadata name="timeRedLightTimerV.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>776, 17</value>
+    <value>710, 50</value>
   </metadata>
   <metadata name="timeYellowLightTimerV.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 65</value>
+    <value>16, 50</value>
   </metadata>
   <metadata name="timeGreenLightTimerV.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>1004, 17</value>

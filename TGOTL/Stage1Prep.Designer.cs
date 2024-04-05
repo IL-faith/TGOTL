@@ -100,7 +100,9 @@
             // 
             // pbPauseBtn
             // 
-            this.pbPauseBtn.BackColor = System.Drawing.SystemColors.Info;
+            this.pbPauseBtn.BackColor = System.Drawing.Color.Transparent;
+            this.pbPauseBtn.BackgroundImage = global::TGOTL.Properties.Resources.pause_transparent;
+            this.pbPauseBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pbPauseBtn.Location = new System.Drawing.Point(992, 0);
             this.pbPauseBtn.Name = "pbPauseBtn";
             this.pbPauseBtn.Size = new System.Drawing.Size(169, 133);
@@ -144,6 +146,7 @@
             this.lblSelect0BackBtn.TabIndex = 22;
             this.lblSelect0BackBtn.Tag = "select";
             this.lblSelect0BackBtn.Text = "BACK";
+            this.lblSelect0BackBtn.Visible = false;
             // 
             // lblSelect1PauseBtn
             // 
@@ -157,6 +160,7 @@
             this.lblSelect1PauseBtn.TabIndex = 25;
             this.lblSelect1PauseBtn.Tag = "select";
             this.lblSelect1PauseBtn.Text = "BACK";
+            this.lblSelect1PauseBtn.Visible = false;
             // 
             // lblSelect3FinishPrepBtn
             // 
@@ -170,6 +174,7 @@
             this.lblSelect3FinishPrepBtn.TabIndex = 26;
             this.lblSelect3FinishPrepBtn.Tag = "select";
             this.lblSelect3FinishPrepBtn.Text = "BACK";
+            this.lblSelect3FinishPrepBtn.Visible = false;
             // 
             // pbTrafficLightH1
             // 
