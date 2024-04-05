@@ -89,6 +89,7 @@
             this.lblPlayerScore.Size = new System.Drawing.Size(295, 165);
             this.lblPlayerScore.TabIndex = 20;
             this.lblPlayerScore.Text = "Your score: #";
+            this.lblPlayerScore.Visible = false;
             // 
             // lblStageLockedMessage
             // 
@@ -99,6 +100,7 @@
             this.lblStageLockedMessage.TabIndex = 22;
             this.lblStageLockedMessage.Text = "Beat previous stage to unlock";
             this.lblStageLockedMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblStageLockedMessage.Visible = false;
             // 
             // lblSelect0BackBtn
             // 
@@ -175,6 +177,7 @@
             this.pbNextArrow.BackColor = System.Drawing.Color.Transparent;
             this.pbNextArrow.BackgroundImage = global::TGOTL.Properties.Resources.next_transparent;
             this.pbNextArrow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pbNextArrow.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbNextArrow.Location = new System.Drawing.Point(926, 343);
             this.pbNextArrow.Name = "pbNextArrow";
             this.pbNextArrow.Size = new System.Drawing.Size(140, 74);
@@ -187,17 +190,21 @@
             this.pbPrevArrow.BackColor = System.Drawing.Color.Transparent;
             this.pbPrevArrow.BackgroundImage = global::TGOTL.Properties.Resources.back_transparent;
             this.pbPrevArrow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pbPrevArrow.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbPrevArrow.Location = new System.Drawing.Point(69, 343);
             this.pbPrevArrow.Name = "pbPrevArrow";
             this.pbPrevArrow.Size = new System.Drawing.Size(140, 74);
             this.pbPrevArrow.TabIndex = 18;
             this.pbPrevArrow.TabStop = false;
+            this.pbPrevArrow.Visible = false;
             this.pbPrevArrow.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PrevBtnClick);
             // 
             // pbStagePreview
             // 
             this.pbStagePreview.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.pbStagePreview.BackgroundImage = global::TGOTL.Properties.Resources.stage1;
             this.pbStagePreview.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pbStagePreview.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbStagePreview.Location = new System.Drawing.Point(296, 155);
             this.pbStagePreview.Name = "pbStagePreview";
             this.pbStagePreview.Size = new System.Drawing.Size(530, 408);
@@ -210,6 +217,7 @@
             this.pbPauseBtn.BackColor = System.Drawing.Color.Transparent;
             this.pbPauseBtn.BackgroundImage = global::TGOTL.Properties.Resources.pause_transparent;
             this.pbPauseBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pbPauseBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbPauseBtn.Location = new System.Drawing.Point(992, 0);
             this.pbPauseBtn.Name = "pbPauseBtn";
             this.pbPauseBtn.Size = new System.Drawing.Size(169, 133);

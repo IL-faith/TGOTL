@@ -12,6 +12,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TGOTL.Properties;
 
 namespace TGOTL
 {
@@ -71,10 +72,11 @@ namespace TGOTL
             SetUpInitialTrafficLightSettings();
             lblPrep.Text = "Pre-Prep";
             lblFinishPrepBtn.Text = "Continue";
-            pbV2Car1.Visible = false;
-            pbV1Car1.Visible = false;
-            pbH1Car1.Visible = false;
-            pbH2Car1.Visible = false;
+
+            pbTrafficLightH2.Image = Resources.lights_left_red;
+            pbTrafficLightH1.Image = Resources.lights_right_red;
+            pbTrafficLightV1.Image = Resources.lights_down_red;
+            pbTrafficLightV2.Image = Resources.lights_up_red;
 
             stageSpeedLimit = 70;
             numCarsToMake = 10;//rnd.Next(100) + 60;
@@ -116,13 +118,15 @@ namespace TGOTL
 
         private void LightIsRedH(object sender, EventArgs e)
         {
-            lblPrep.Text = "redhv";
+            //lblPrep.Text = "redhv";
             if (lightTimerPass2)
             {
                 timeRedLightTimerH.Stop();
                 lightTimerPass2 = false;
                 //lblPrep.Text += " 2nd pass";
                 signalColorH = TrafficLightColor.GREEN; //signalColorV = red
+                pbTrafficLightH1.Image = Resources.lights3_zoomed_out_transparent;
+                pbTrafficLightH2.Image = Resources.lights3_zoom_out_lights_left;
                 timeGreenLightTimerH.Start();
             }
             else
@@ -130,12 +134,14 @@ namespace TGOTL
         }
         private void LightIsGreenH(object sender, EventArgs e)
         {
-            lblPrep.Text = "redv";
+            //lblPrep.Text = "redv";
             if (lightTimerPass2)
             {
                 timeGreenLightTimerH.Stop();
                 lightTimerPass2 = false;
                 signalColorH = TrafficLightColor.YELLOW; //signalColorV = red
+                pbTrafficLightH2.Image = Resources.lights_left_yellow;
+                pbTrafficLightH1.Image = Resources.lights_right_yellow;
                 timeYellowLightTimerH.Start();
             }
             else
@@ -144,12 +150,14 @@ namespace TGOTL
 
         private void LightIsYellowH(object sender, EventArgs e)
         {
-            lblPrep.Text = "redv";
+            //lblPrep.Text = "redv";
             if (lightTimerPass2)
             {
                 timeYellowLightTimerH.Stop();
                 lightTimerPass2 = false;
                 signalColorH = TrafficLightColor.RED; //signalColorV = red
+                pbTrafficLightV1.Image = Resources.lights_down_red;
+                pbTrafficLightV2.Image = Resources.lights_up_red;
                 timeRedLightTimerV.Start(); //transition time from h lights to v lights
             }
             else
@@ -159,12 +167,14 @@ namespace TGOTL
         }
         private void LightIsRedV(object sender, EventArgs e)
         {
-            lblPrep.Text = "redvh";
+            //lblPrep.Text = "redvh";
             if (lightTimerPass2)
             {
                 timeRedLightTimerV.Stop();
                 lightTimerPass2 = false;
                 signalColorV = TrafficLightColor.GREEN; //signalColorH = red
+                pbTrafficLightV1.Image = Resources.lights3_zoom_out_lights_down;
+                pbTrafficLightV2.Image = Resources.lights3_zoom_out_lights_up;
                 timeGreenLightTimerV.Start();
             }
             else
@@ -172,12 +182,14 @@ namespace TGOTL
         }
         private void LightIsGreenV(object sender, EventArgs e)
         {
-            lblPrep.Text = "redh";
+            //lblPrep.Text = "redh";
             if (lightTimerPass2)
             {
                 timeGreenLightTimerV.Stop();
                 lightTimerPass2 = false;
                 signalColorV = TrafficLightColor.YELLOW; //signalColorH = red
+                pbTrafficLightV1.Image = Resources.lights_down_yellow;
+                pbTrafficLightV2.Image = Resources.lights_up_yellow;
                 timeYellowLightTimerV.Start();
             }
             else
@@ -186,12 +198,14 @@ namespace TGOTL
 
         private void LightIsYellowV(object sender, EventArgs e)
         {
-            lblPrep.Text = "redh";
+            //lblPrep.Text = "redh";
             if (lightTimerPass2)
             {
                 timeYellowLightTimerV.Stop();
                 lightTimerPass2 = false;
                 signalColorV = TrafficLightColor.RED; //signalColorH = red
+                pbTrafficLightH2.Image = Resources.lights_left_red;
+                pbTrafficLightH1.Image = Resources.lights_right_red;
                 timeRedLightTimerH.Start(); //transition time from v lights to h lights
             }
             else

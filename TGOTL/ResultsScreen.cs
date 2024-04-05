@@ -70,13 +70,13 @@ namespace TGOTL
                 pbRetryBtn.Location = lblNextStageBtn.Location;
             }
 
-            if (playerScore < game.Stages[game.CurrentStage].BestPlayerScore)
+            if (playerScore < game.Stages[game.CurrentStage].BestPlayerScore || game.Stages[game.CurrentStage].BestPlayerScore == -1)
             {
                 game.Stages[game.CurrentStage].BestPlayerScore = playerScore;
-                MessageBox.Show("new high score");
+                //MessageBox.Show("new high score");
             }
-            else
-                MessageBox.Show("no new high score");
+            else { }
+                //MessageBox.Show("no new high score");
         }
 
         private void SortSelectChoices()
@@ -128,14 +128,62 @@ namespace TGOTL
                             break;
                         case 1:
                             game.CurrentStage += 1;
-                            NonPrepScreen nextStage = new NonPrepScreen(this.Location, game);
-                            nextStage.Show();
-                            this.Close();
+                            if (game.CurrentStage == 1)
+                            {
+                                Stage2Prep s2 = new Stage2Prep(this.Location, game);
+                                s2.Show();
+                                this.Close();
+                            }
+                            else if (game.CurrentStage == 2)
+                            {
+                                Stage3Prep s3 = new Stage3Prep(this.Location, game);
+                                s3.Show();
+                                this.Close();
+                            }
+                            else if (game.CurrentStage == 3)
+                            {
+                                Stage4Prep s4 = new Stage4Prep(this.Location, game);
+                                s4.Show();
+                                this.Close();
+                            }
+                            else if (game.CurrentStage == 4)
+                            {
+                                Stage5Prep s5 = new Stage5Prep(this.Location, game);
+                                s5.Show();
+                                this.Close();
+                            }
                             break;
                         case 2:
-                            NonPrepScreen retryStage = new NonPrepScreen(this.Location, game);
-                            retryStage.Show();
-                            this.Close();
+                            if (game.CurrentStage == 0)
+                            {
+                                Stage1Prep s1 = new Stage1Prep(this.Location, game);
+                                s1.Show();
+                                this.Close();
+                            }
+                            else if (game.CurrentStage == 1)
+                            {
+                                Stage2Prep s2 = new Stage2Prep(this.Location, game);
+                                s2.Show();
+                                this.Close();
+                            }
+                            else if (game.CurrentStage == 2)
+                            {
+                                Stage3Prep s3 = new Stage3Prep(this.Location, game);
+                                s3.Show();
+                                this.Close();
+                            }
+                            else if (game.CurrentStage == 3)
+                            {
+                                Stage4Prep s4 = new Stage4Prep(this.Location, game);
+                                s4.Show();
+                                this.Close();
+                            }
+                            else if (game.CurrentStage == 4)
+                            {
+                                Stage5Prep s5 = new Stage5Prep(this.Location, game);
+                                s5.Show();
+                                this.Close();
+                            }
                             break;
                     }
                 }

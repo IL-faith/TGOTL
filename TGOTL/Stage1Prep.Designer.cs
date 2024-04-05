@@ -36,7 +36,7 @@
             this.lblPrep = new System.Windows.Forms.Label();
             this.lblSelect0BackBtn = new System.Windows.Forms.Label();
             this.lblSelect1PauseBtn = new System.Windows.Forms.Label();
-            this.lblSelect3FinishPrepBtn = new System.Windows.Forms.Label();
+            this.lblSelect2FinishPrepBtn = new System.Windows.Forms.Label();
             this.pbTrafficLightH1 = new System.Windows.Forms.PictureBox();
             this.pbTrafficLightH2 = new System.Windows.Forms.PictureBox();
             this.pbTrafficLightV1 = new System.Windows.Forms.PictureBox();
@@ -67,6 +67,10 @@
             this.lblIntersectionArea = new System.Windows.Forms.Label();
             this.lblStageScore = new System.Windows.Forms.Label();
             this.timeStageTimer2 = new System.Windows.Forms.Timer(this.components);
+            this.lblSelect3TrafficLight1 = new System.Windows.Forms.Label();
+            this.lblSelect4TrafficLight2 = new System.Windows.Forms.Label();
+            this.lblSelect5TrafficLight3 = new System.Windows.Forms.Label();
+            this.lblSelect6TrafficLight4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbPauseBtn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbTrafficLightH1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbTrafficLightH2)).BeginInit();
@@ -103,6 +107,7 @@
             this.pbPauseBtn.BackColor = System.Drawing.Color.Transparent;
             this.pbPauseBtn.BackgroundImage = global::TGOTL.Properties.Resources.pause_transparent;
             this.pbPauseBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pbPauseBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbPauseBtn.Location = new System.Drawing.Point(992, 0);
             this.pbPauseBtn.Name = "pbPauseBtn";
             this.pbPauseBtn.Size = new System.Drawing.Size(169, 133);
@@ -162,24 +167,25 @@
             this.lblSelect1PauseBtn.Text = "BACK";
             this.lblSelect1PauseBtn.Visible = false;
             // 
-            // lblSelect3FinishPrepBtn
+            // lblSelect2FinishPrepBtn
             // 
-            this.lblSelect3FinishPrepBtn.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.lblSelect3FinishPrepBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblSelect3FinishPrepBtn.Font = new System.Drawing.Font("ROG Fonts", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSelect3FinishPrepBtn.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.lblSelect3FinishPrepBtn.Location = new System.Drawing.Point(816, 632);
-            this.lblSelect3FinishPrepBtn.Name = "lblSelect3FinishPrepBtn";
-            this.lblSelect3FinishPrepBtn.Size = new System.Drawing.Size(344, 125);
-            this.lblSelect3FinishPrepBtn.TabIndex = 26;
-            this.lblSelect3FinishPrepBtn.Tag = "select";
-            this.lblSelect3FinishPrepBtn.Text = "BACK";
-            this.lblSelect3FinishPrepBtn.Visible = false;
+            this.lblSelect2FinishPrepBtn.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.lblSelect2FinishPrepBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblSelect2FinishPrepBtn.Font = new System.Drawing.Font("ROG Fonts", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSelect2FinishPrepBtn.ForeColor = System.Drawing.Color.DeepSkyBlue;
+            this.lblSelect2FinishPrepBtn.Location = new System.Drawing.Point(816, 632);
+            this.lblSelect2FinishPrepBtn.Name = "lblSelect2FinishPrepBtn";
+            this.lblSelect2FinishPrepBtn.Size = new System.Drawing.Size(344, 125);
+            this.lblSelect2FinishPrepBtn.TabIndex = 26;
+            this.lblSelect2FinishPrepBtn.Tag = "select";
+            this.lblSelect2FinishPrepBtn.Text = "BACK";
+            this.lblSelect2FinishPrepBtn.Visible = false;
             // 
             // pbTrafficLightH1
             // 
             this.pbTrafficLightH1.BackColor = System.Drawing.Color.Transparent;
-            this.pbTrafficLightH1.Image = ((System.Drawing.Image)(resources.GetObject("pbTrafficLightH1.Image")));
+            this.pbTrafficLightH1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbTrafficLightH1.Image = global::TGOTL.Properties.Resources.lights3_zoomed_out_transparent;
             this.pbTrafficLightH1.Location = new System.Drawing.Point(324, 227);
             this.pbTrafficLightH1.Name = "pbTrafficLightH1";
             this.pbTrafficLightH1.Size = new System.Drawing.Size(90, 164);
@@ -190,7 +196,8 @@
             // pbTrafficLightH2
             // 
             this.pbTrafficLightH2.BackColor = System.Drawing.Color.Transparent;
-            this.pbTrafficLightH2.Image = ((System.Drawing.Image)(resources.GetObject("pbTrafficLightH2.Image")));
+            this.pbTrafficLightH2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbTrafficLightH2.Image = global::TGOTL.Properties.Resources.lights3_zoom_out_lights_left;
             this.pbTrafficLightH2.Location = new System.Drawing.Point(762, 425);
             this.pbTrafficLightH2.Name = "pbTrafficLightH2";
             this.pbTrafficLightH2.Size = new System.Drawing.Size(90, 164);
@@ -201,7 +208,8 @@
             // pbTrafficLightV1
             // 
             this.pbTrafficLightV1.BackColor = System.Drawing.Color.Transparent;
-            this.pbTrafficLightV1.Image = ((System.Drawing.Image)(resources.GetObject("pbTrafficLightV1.Image")));
+            this.pbTrafficLightV1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbTrafficLightV1.Image = global::TGOTL.Properties.Resources.lights3_zoom_out_lights_down;
             this.pbTrafficLightV1.Location = new System.Drawing.Point(602, 146);
             this.pbTrafficLightV1.Name = "pbTrafficLightV1";
             this.pbTrafficLightV1.Size = new System.Drawing.Size(164, 90);
@@ -212,7 +220,8 @@
             // pbTrafficLightV2
             // 
             this.pbTrafficLightV2.BackColor = System.Drawing.Color.Transparent;
-            this.pbTrafficLightV2.Image = ((System.Drawing.Image)(resources.GetObject("pbTrafficLightV2.Image")));
+            this.pbTrafficLightV2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbTrafficLightV2.Image = global::TGOTL.Properties.Resources.lights3_zoom_out_lights_up;
             this.pbTrafficLightV2.Location = new System.Drawing.Point(405, 584);
             this.pbTrafficLightV2.Name = "pbTrafficLightV2";
             this.pbTrafficLightV2.Size = new System.Drawing.Size(164, 90);
@@ -360,6 +369,7 @@
             this.pbH1Car1.Size = new System.Drawing.Size(100, 50);
             this.pbH1Car1.TabIndex = 32;
             this.pbH1Car1.TabStop = false;
+            this.pbH1Car1.Visible = false;
             // 
             // pbH2Car1
             // 
@@ -368,6 +378,7 @@
             this.pbH2Car1.Size = new System.Drawing.Size(100, 50);
             this.pbH2Car1.TabIndex = 33;
             this.pbH2Car1.TabStop = false;
+            this.pbH2Car1.Visible = false;
             // 
             // pbV2Car1
             // 
@@ -376,6 +387,7 @@
             this.pbV2Car1.Size = new System.Drawing.Size(50, 100);
             this.pbV2Car1.TabIndex = 34;
             this.pbV2Car1.TabStop = false;
+            this.pbV2Car1.Visible = false;
             // 
             // pbV1Car1
             // 
@@ -384,6 +396,7 @@
             this.pbV1Car1.Size = new System.Drawing.Size(50, 100);
             this.pbV1Car1.TabIndex = 35;
             this.pbV1Car1.TabStop = false;
+            this.pbV1Car1.Visible = false;
             // 
             // timeRedLightTimerH
             // 
@@ -438,6 +451,62 @@
             this.timeStageTimer2.Interval = 150;
             this.timeStageTimer2.Tick += new System.EventHandler(this.TrafficGeneration2);
             // 
+            // lblSelect3TrafficLight1
+            // 
+            this.lblSelect3TrafficLight1.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.lblSelect3TrafficLight1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblSelect3TrafficLight1.Font = new System.Drawing.Font("ROG Fonts", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSelect3TrafficLight1.ForeColor = System.Drawing.Color.DeepSkyBlue;
+            this.lblSelect3TrafficLight1.Location = new System.Drawing.Point(589, 135);
+            this.lblSelect3TrafficLight1.Name = "lblSelect3TrafficLight1";
+            this.lblSelect3TrafficLight1.Size = new System.Drawing.Size(191, 113);
+            this.lblSelect3TrafficLight1.TabIndex = 38;
+            this.lblSelect3TrafficLight1.Tag = "select";
+            this.lblSelect3TrafficLight1.Text = "BACK";
+            this.lblSelect3TrafficLight1.Visible = false;
+            // 
+            // lblSelect4TrafficLight2
+            // 
+            this.lblSelect4TrafficLight2.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.lblSelect4TrafficLight2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblSelect4TrafficLight2.Font = new System.Drawing.Font("ROG Fonts", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSelect4TrafficLight2.ForeColor = System.Drawing.Color.DeepSkyBlue;
+            this.lblSelect4TrafficLight2.Location = new System.Drawing.Point(392, 574);
+            this.lblSelect4TrafficLight2.Name = "lblSelect4TrafficLight2";
+            this.lblSelect4TrafficLight2.Size = new System.Drawing.Size(191, 113);
+            this.lblSelect4TrafficLight2.TabIndex = 39;
+            this.lblSelect4TrafficLight2.Tag = "select";
+            this.lblSelect4TrafficLight2.Text = "BACK";
+            this.lblSelect4TrafficLight2.Visible = false;
+            // 
+            // lblSelect5TrafficLight3
+            // 
+            this.lblSelect5TrafficLight3.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.lblSelect5TrafficLight3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblSelect5TrafficLight3.Font = new System.Drawing.Font("ROG Fonts", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSelect5TrafficLight3.ForeColor = System.Drawing.Color.DeepSkyBlue;
+            this.lblSelect5TrafficLight3.Location = new System.Drawing.Point(752, 413);
+            this.lblSelect5TrafficLight3.Name = "lblSelect5TrafficLight3";
+            this.lblSelect5TrafficLight3.Size = new System.Drawing.Size(113, 191);
+            this.lblSelect5TrafficLight3.TabIndex = 40;
+            this.lblSelect5TrafficLight3.Tag = "select";
+            this.lblSelect5TrafficLight3.Text = "BACK";
+            this.lblSelect5TrafficLight3.Visible = false;
+            // 
+            // lblSelect6TrafficLight4
+            // 
+            this.lblSelect6TrafficLight4.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.lblSelect6TrafficLight4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblSelect6TrafficLight4.Font = new System.Drawing.Font("ROG Fonts", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSelect6TrafficLight4.ForeColor = System.Drawing.Color.DeepSkyBlue;
+            this.lblSelect6TrafficLight4.Location = new System.Drawing.Point(313, 215);
+            this.lblSelect6TrafficLight4.Name = "lblSelect6TrafficLight4";
+            this.lblSelect6TrafficLight4.Size = new System.Drawing.Size(113, 191);
+            this.lblSelect6TrafficLight4.TabIndex = 41;
+            this.lblSelect6TrafficLight4.Tag = "select";
+            this.lblSelect6TrafficLight4.Text = "BACK";
+            this.lblSelect6TrafficLight4.Visible = false;
+            // 
             // Stage1Prep
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
@@ -461,7 +530,11 @@
             this.Controls.Add(this.lblFinishPrepBtn);
             this.Controls.Add(this.lblSelect0BackBtn);
             this.Controls.Add(this.lblSelect1PauseBtn);
-            this.Controls.Add(this.lblSelect3FinishPrepBtn);
+            this.Controls.Add(this.lblSelect2FinishPrepBtn);
+            this.Controls.Add(this.lblSelect3TrafficLight1);
+            this.Controls.Add(this.lblSelect4TrafficLight2);
+            this.Controls.Add(this.lblSelect5TrafficLight3);
+            this.Controls.Add(this.lblSelect6TrafficLight4);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Stage1Prep";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
@@ -498,7 +571,7 @@
         private System.Windows.Forms.Label lblPrep;
         private System.Windows.Forms.Label lblSelect0BackBtn;
         private System.Windows.Forms.Label lblSelect1PauseBtn;
-        private System.Windows.Forms.Label lblSelect3FinishPrepBtn;
+        private System.Windows.Forms.Label lblSelect2FinishPrepBtn;
         private System.Windows.Forms.PictureBox pbTrafficLightH1;
         private System.Windows.Forms.PictureBox pbTrafficLightH2;
         private System.Windows.Forms.PictureBox pbTrafficLightV1;
@@ -529,6 +602,10 @@
         private System.Windows.Forms.Label lblIntersectionArea;
         private System.Windows.Forms.Label lblStageScore;
         private System.Windows.Forms.Timer timeStageTimer2;
+        private System.Windows.Forms.Label lblSelect3TrafficLight1;
+        private System.Windows.Forms.Label lblSelect4TrafficLight2;
+        private System.Windows.Forms.Label lblSelect5TrafficLight3;
+        private System.Windows.Forms.Label lblSelect6TrafficLight4;
     }
 }
 

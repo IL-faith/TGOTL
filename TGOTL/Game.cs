@@ -58,10 +58,17 @@ namespace TGOTL
             //stages[3].InitialScore = 2;
             //stages[4].InitialScore = 2;
 
-            stages[0].GetImage = Image.FromFile(@"C:\Users\faith\Documents\Senior Project\TGOTL\test assets\stage1.png");
-            stages[1].GetImage = Image.FromFile(@"C:\Users\faith\Documents\Senior Project\TGOTL\test assets\stage2.png");
-            stages[2].GetImage = Image.FromFile(@"C:\Users\faith\Documents\Senior Project\TGOTL\test assets\stage1.png");
-            stages[3].GetImage = Image.FromFile(@"C:\Users\faith\Documents\Senior Project\TGOTL\test assets\stage4.png");
+            for (int i = 0; i < 5; i++)
+            {
+                stages[i].InitialScore = -1;
+                stages[i].CurrentPlayerScore = -1;
+                stages[i].BestPlayerScore = -1;
+            }
+
+            stages[0].GetImage = Resources.stage1;
+            stages[1].GetImage = Resources.stage2;
+            stages[2].GetImage = Resources.stage1;
+            stages[3].GetImage = Resources.stage4;
             stages[4].GetImage = Image.FromFile(@"C:\Users\faith\Documents\Senior Project\TGOTL\test assets\schoolStageCroppedWLights.png");
         }
 

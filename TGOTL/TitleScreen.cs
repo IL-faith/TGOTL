@@ -154,7 +154,8 @@ namespace TGOTL
             if (playstyle.Equals("mouse"))
             {
                 game.PlaystyleIsMouse = (playstyle.Equals("mouse") ? true : false);
-                StoryScreen newGame = new StoryScreen(this.Location, game, false);
+                //StoryScreen newGame = new StoryScreen(this.Location, game, false);
+                StageSelectionScreen newGame = new StageSelectionScreen(this.Location, game);
                 newGame.Show();
                 this.Close();
             }
@@ -261,7 +262,8 @@ namespace TGOTL
                     {
                         case 0:
                             game.PlaystyleIsMouse = (playstyle.Equals("mouse") ? true : false);
-                            StoryScreen newGame = new StoryScreen(this.Location, game, false);
+                            //StoryScreen newGame = new StoryScreen(this.Location, game, false);
+                            StageSelectionScreen newGame = new StageSelectionScreen(this.Location, game);
                             newGame.Show();
                             this.Close();
                             break;

@@ -59,7 +59,6 @@ namespace TGOTL
                     }
                 }
             }
-            MessageBox.Show("complete");
         }
 
         private void KeyboardKeyDown(object sender, KeyEventArgs e)

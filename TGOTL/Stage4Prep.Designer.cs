@@ -36,7 +36,7 @@
             this.lblPrep = new System.Windows.Forms.Label();
             this.lblSelect0BackBtn = new System.Windows.Forms.Label();
             this.lblSelect1PauseBtn = new System.Windows.Forms.Label();
-            this.lblSelect3FinishPrepBtn = new System.Windows.Forms.Label();
+            this.lblSelect2FinishPrepBtn = new System.Windows.Forms.Label();
             this.pbTrafficLightH1 = new System.Windows.Forms.PictureBox();
             this.pbTrafficLightH2 = new System.Windows.Forms.PictureBox();
             this.flpTimerTrafficLightMenu = new System.Windows.Forms.FlowLayoutPanel();
@@ -103,7 +103,9 @@
             // 
             // pbPauseBtn
             // 
-            this.pbPauseBtn.BackColor = System.Drawing.SystemColors.Info;
+            this.pbPauseBtn.BackColor = System.Drawing.Color.Transparent;
+            this.pbPauseBtn.BackgroundImage = global::TGOTL.Properties.Resources.pause_transparent;
+            this.pbPauseBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pbPauseBtn.Location = new System.Drawing.Point(992, 0);
             this.pbPauseBtn.Name = "pbPauseBtn";
             this.pbPauseBtn.Size = new System.Drawing.Size(169, 133);
@@ -147,6 +149,7 @@
             this.lblSelect0BackBtn.TabIndex = 22;
             this.lblSelect0BackBtn.Tag = "select";
             this.lblSelect0BackBtn.Text = "BACK";
+            this.lblSelect0BackBtn.Visible = false;
             // 
             // lblSelect1PauseBtn
             // 
@@ -160,19 +163,21 @@
             this.lblSelect1PauseBtn.TabIndex = 25;
             this.lblSelect1PauseBtn.Tag = "select";
             this.lblSelect1PauseBtn.Text = "BACK";
+            this.lblSelect1PauseBtn.Visible = false;
             // 
-            // lblSelect3FinishPrepBtn
+            // lblSelect2FinishPrepBtn
             // 
-            this.lblSelect3FinishPrepBtn.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.lblSelect3FinishPrepBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblSelect3FinishPrepBtn.Font = new System.Drawing.Font("ROG Fonts", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSelect3FinishPrepBtn.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.lblSelect3FinishPrepBtn.Location = new System.Drawing.Point(816, 632);
-            this.lblSelect3FinishPrepBtn.Name = "lblSelect3FinishPrepBtn";
-            this.lblSelect3FinishPrepBtn.Size = new System.Drawing.Size(344, 125);
-            this.lblSelect3FinishPrepBtn.TabIndex = 26;
-            this.lblSelect3FinishPrepBtn.Tag = "select";
-            this.lblSelect3FinishPrepBtn.Text = "BACK";
+            this.lblSelect2FinishPrepBtn.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.lblSelect2FinishPrepBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblSelect2FinishPrepBtn.Font = new System.Drawing.Font("ROG Fonts", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSelect2FinishPrepBtn.ForeColor = System.Drawing.Color.DeepSkyBlue;
+            this.lblSelect2FinishPrepBtn.Location = new System.Drawing.Point(816, 632);
+            this.lblSelect2FinishPrepBtn.Name = "lblSelect2FinishPrepBtn";
+            this.lblSelect2FinishPrepBtn.Size = new System.Drawing.Size(344, 125);
+            this.lblSelect2FinishPrepBtn.TabIndex = 26;
+            this.lblSelect2FinishPrepBtn.Tag = "select";
+            this.lblSelect2FinishPrepBtn.Text = "BACK";
+            this.lblSelect2FinishPrepBtn.Visible = false;
             // 
             // pbTrafficLightH1
             // 
@@ -501,7 +506,7 @@
             this.Controls.Add(this.lblFinishPrepBtn);
             this.Controls.Add(this.lblSelect0BackBtn);
             this.Controls.Add(this.lblSelect1PauseBtn);
-            this.Controls.Add(this.lblSelect3FinishPrepBtn);
+            this.Controls.Add(this.lblSelect2FinishPrepBtn);
             this.Controls.Add(this.lblStageScore);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Stage4Prep";
@@ -539,7 +544,7 @@
         private System.Windows.Forms.Label lblPrep;
         private System.Windows.Forms.Label lblSelect0BackBtn;
         private System.Windows.Forms.Label lblSelect1PauseBtn;
-        private System.Windows.Forms.Label lblSelect3FinishPrepBtn;
+        private System.Windows.Forms.Label lblSelect2FinishPrepBtn;
         private System.Windows.Forms.PictureBox pbTrafficLightH1;
         private System.Windows.Forms.PictureBox pbTrafficLightH2;
         private System.Windows.Forms.FlowLayoutPanel flpTimerTrafficLightMenu;
