@@ -111,7 +111,8 @@
             // 
             this.pbNextArrow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(79)))), ((int)(((byte)(114)))));
             this.pbNextArrow.BackgroundImage = global::TGOTL.Properties.Resources.next_transparent;
-            this.pbNextArrow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pbNextArrow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pbNextArrow.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbNextArrow.Location = new System.Drawing.Point(980, 651);
             this.pbNextArrow.Name = "pbNextArrow";
             this.pbNextArrow.Size = new System.Drawing.Size(140, 74);
@@ -123,7 +124,8 @@
             // 
             this.pbPrevArrow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(79)))), ((int)(((byte)(114)))));
             this.pbPrevArrow.BackgroundImage = global::TGOTL.Properties.Resources.back_transparent;
-            this.pbPrevArrow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pbPrevArrow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pbPrevArrow.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbPrevArrow.Location = new System.Drawing.Point(34, 651);
             this.pbPrevArrow.Name = "pbPrevArrow";
             this.pbPrevArrow.Size = new System.Drawing.Size(140, 74);

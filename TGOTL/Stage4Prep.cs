@@ -12,6 +12,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TGOTL.Properties;
 
 namespace TGOTL
 {
@@ -122,6 +123,7 @@ namespace TGOTL
                 lightTimerPass2 = false;
                 //lblPrep.Text += " 2nd pass";
                 signalColorH1 = TrafficLightColor.GREEN; //signalColorH2 = red
+                pbTrafficLightH1.Image = Resources.lights3_zoom_out_small_transparent;
                 timeGreenLightTimerH1.Start();
             }
             else
@@ -135,6 +137,7 @@ namespace TGOTL
                 timeGreenLightTimerH1.Stop();
                 lightTimerPass2 = false;
                 signalColorH1 = TrafficLightColor.YELLOW; //signalColorH2 = red
+                pbTrafficLightH1.Image = Resources.lights_right_yellow_small;
                 timeYellowLightTimerH1.Start();
             }
             else
@@ -149,6 +152,7 @@ namespace TGOTL
                 timeYellowLightTimerH1.Stop();
                 lightTimerPass2 = false;
                 signalColorH1 = TrafficLightColor.RED; //signalColorH2 = red
+                pbTrafficLightH1.Image = Resources.lights_right_red_small;
                 timeRedLightTimerH1.Start(); 
             }
             else
@@ -164,6 +168,7 @@ namespace TGOTL
                 timeRedLightTimerH2.Stop();
                 lightTimerPass2 = false;
                 signalColorH2 = TrafficLightColor.GREEN; //signalColorH1 = red
+                pbTrafficLightH2.Image = Resources.lights3_zoom_out_small_transparent;
                 timeGreenLightTimerH2.Start();
             }
             else
@@ -177,6 +182,7 @@ namespace TGOTL
                 timeGreenLightTimerH2.Stop();
                 lightTimerPass2 = false;
                 signalColorH2 = TrafficLightColor.YELLOW; //signalColorH1 = red
+                pbTrafficLightH2.Image = Resources.lights_right_yellow_small;
                 timeYellowLightTimerH2.Start();
             }
             else
@@ -192,6 +198,7 @@ namespace TGOTL
                 lightTimerPass2 = false;
                 signalColorH2 = TrafficLightColor.RED; //signalColorH1 = red
                 timeRedLightTimerH2.Start(); //transition time from v lights to h lights
+                pbTrafficLightH2.Image = Resources.lights_right_red_small;
             }
             else
                 lightTimerPass2 = true;

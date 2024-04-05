@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using TGOTL.Properties;
 
 namespace TGOTL
@@ -21,15 +22,26 @@ namespace TGOTL
         public StageSelectionScreen(Point formPosition, Game g)
         {
             InitializeComponent();
-            lblSelect0BackBtn.Visible = false;
             this.Location = formPosition;
             game = g;
-            lblStageLockedMessage.Visible = false;
-            pbPrevArrow.Visible = false;
-            pbStagePreview.BackColor = Color.DarkSeaGreen; //pbStagePreview = game.Stages[stageNum-1].Image;
-            //lblPlayerScore.Text = lblPlayerScore.Text.Replace("#", game.Stages[stageNum - 1].BestPlayerScore + "");
-            //lblPlayerScore.Text = lblPlayerScore.Text.Replace("#", game.Stages[stageNum - 1].InitialScore + "");
+            //pbStagePreview.BackColor = Color.DarkSeaGreen; //pbStagePreview = game.Stages[stageNum-1].Image;
+            //lblPlayerScore.Text = "Best Score: "+ game.Stages[stageNum - 1].BestPlayerScore + "");
+            //lblPlayerScore.Text = "Best Score: "+ game.Stages[stageNum - 1].InitialScore + "");
             //ClearSelects();
+
+            SortSelectChoices();
+
+            if (game.BeatGame && !game.ShownEnding)
+                game.ShownEnding = true;
+
+            if (game.Stages[stageNum - 1].BestPlayerScore > -1)
+                lblStageScore.Text = "Best Score: " + game.Stages[stageNum - 1].BestPlayerScore;
+
+            game.PlaystyleIsMouse = true;
+        }
+
+        private void SortSelectChoices()
+        {
             int i = 0;
             foreach (Control control in this.Controls)
             {
@@ -40,15 +52,8 @@ namespace TGOTL
                     i++;
                 }
             }
-            SortSelectChoices();
 
-            if (game.BeatGame && !game.ShownEnding)
-                game.ShownEnding = true;
-        }
-
-        private void SortSelectChoices()
-        {
-            for (int i = 0; i < selectChoices.Length; i++)
+            for (i = 0; i < selectChoices.Length; i++)
             {
                 for (int j = i + 1; j < selectChoices.Length; j++)
                 {
@@ -138,11 +143,22 @@ namespace TGOTL
                                 if (lblStageLockedMessage.Visible)
                                 {
                                     lblStageLockedMessage.Visible = false;
-                                    pbStagePreview.BackColor = Color.DarkSeaGreen; //pbStagePreview.Image = //lock.png
+                                    pbStagePreview.BackgroundImage = game.Stages[stageNum - 1].GetImage;
                                 }
                                 //lblPlayerScore.Text = lblPlayerScore.Text.Replace(game.Stages[stageNum - 2].BestPlayerScore + "", game.Stages[stageNum - 1].BestPlayerScore + "");
                                 //lblStageScore.Text = lblStageScore.Text.Replace(game.Stages[stageNum - 2].InitialScore + "", game.Stages[stageNum - 1].InitialScore + "");
                             }
+                            else
+                            { 
+                                pbStagePreview.BackgroundImage = Resources._lock;
+                                lblStageLockedMessage.Visible = true;
+                            }
+
+                            if (game.Stages[stageNum-1].BestPlayerScore > -1)
+                                lblStageScore.Text = "Best Score: "+ game.Stages[stageNum - 1].BestPlayerScore;
+                            else
+                                lblStageScore.Text = "Best Score: #";
+
                             break;
                         case 4:
                             stageNum++;
@@ -160,16 +176,24 @@ namespace TGOTL
                                 if (!lblStageLockedMessage.Visible)
                                 {
                                     lblStageLockedMessage.Visible = true;
-                                    pbStagePreview.BackColor = Color.Black; //pbStagePreview.Image = //lock.png
-                                                                            //lblPlayerScore.Text = lblPlayerScore.Text.Replace(game.Stages[stageNum - 2].BestPlayerScore + "", "- -");
-                                                                            //lblStageScore.Text = lblStageScore.Text.Replace(game.Stages[stageNum - 2].InitialScore + "", "- -");
+                                    pbStagePreview.BackgroundImage = Resources._lock;
+                                    //lblPlayerScore.Text = lblPlayerScore.Text.Replace(game.Stages[stageNum - 2].BestPlayerScore + "", "- -");
+                                    //lblStageScore.Text = lblStageScore.Text.Replace(game.Stages[stageNum - 2].InitialScore + "", "- -");
                                 }
                             }
                             else
                             {
+                                pbStagePreview.BackgroundImage = game.Stages[stageNum - 1].GetImage;
+                                lblStageLockedMessage.Visible = true;
                                 //lblPlayerScore.Text = lblPlayerScore.Text.Replace(game.Stages[stageNum - 2].BestPlayerScore + "", game.Stages[stageNum - 1].BestPlayerScore + "");
                                 //lblStageScore.Text = lblStageScore.Text.Replace(game.Stages[stageNum - 2].InitialScore + "", game.Stages[stageNum - 1].InitialScore + "");
                             }
+
+                            if (game.Stages[stageNum - 1].BestPlayerScore > -1)
+                                lblStageScore.Text = "Best Score: "+ game.Stages[stageNum - 1].BestPlayerScore;
+                            else
+                                lblStageScore.Text = "Best Score: #";
+
                             break;
                     }
                 }
@@ -255,6 +279,7 @@ namespace TGOTL
                 {
                     if (!lblStageLockedMessage.Visible)
                     {
+                        pbStagePreview.BackgroundImage = Resources._lock;
                         lblStageLockedMessage.Visible = true;
                         pbStagePreview.BackColor = Color.Black; //pbStagePreview.Image = //lock.png
                         //lblPlayerScore.Text = lblPlayerScore.Text.Replace(game.Stages[stageNum - 2].BestPlayerScore + "", "- -");
@@ -264,9 +289,16 @@ namespace TGOTL
                 else
                 {
                     pbStagePreview.BackgroundImage = game.Stages[stageNum - 1].GetImage;
+                    lblStageLockedMessage.Visible = false;
                     //lblPlayerScore.Text = lblPlayerScore.Text.Replace(game.Stages[stageNum - 2].BestPlayerScore + "", game.Stages[stageNum - 1].BestPlayerScore + "");
                     //lblStageScore.Text = lblStageScore.Text.Replace(game.Stages[stageNum - 2].InitialScore + "", game.Stages[stageNum - 1].InitialScore + "");
                 }
+
+                if (game.Stages[stageNum - 1].BestPlayerScore > -1)
+                    lblStageScore.Text = "Best Score: " + game.Stages[stageNum - 1].BestPlayerScore;
+                else
+                    lblStageScore.Text = "Best Score: #";
+
             }
         }
 
@@ -287,10 +319,22 @@ namespace TGOTL
                         lblStageLockedMessage.Visible = false;
                         pbStagePreview.BackColor = Color.DarkSeaGreen; //pbStagePreview.Image = //lock.png
                     }
-                    pbStagePreview.BackgroundImage = game.Stages[stageNum - 1].GetImage;
+                        pbStagePreview.BackgroundImage = game.Stages[stageNum - 1].GetImage;
+                    //pbStagePreview.BackgroundImage = game.Stages[stageNum - 1].GetImage;
                     //lblPlayerScore.Text = lblPlayerScore.Text.Replace(game.Stages[stageNum - 2].BestPlayerScore + "", game.Stages[stageNum - 1].BestPlayerScore + "");
                     //lblStageScore.Text = lblStageScore.Text.Replace(game.Stages[stageNum - 2].InitialScore + "", game.Stages[stageNum - 1].InitialScore + "");
                 }
+                else
+                {
+                    pbStagePreview.BackgroundImage = Resources._lock;
+                    lblStageLockedMessage.Visible = true;
+                }
+
+                if (game.Stages[stageNum - 1].BestPlayerScore > -1)
+                    lblStageScore.Text = "Best Score: "+ game.Stages[stageNum - 1].BestPlayerScore;
+                else
+                    lblStageScore.Text = "Best Score: #";
+
             }
         }
     }
